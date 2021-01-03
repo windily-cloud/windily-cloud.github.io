@@ -1,25 +1,584 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
 
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
-{% block page_class %}page-post-detail{% endblock %}
 
 
-{% block content %}
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>香港乱局的起源,演变及趋势 - Hexo</title>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>windilycloud</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
+</nav>
 
-{% endblock %}
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="香港乱局的起源,演变及趋势">
+              
+            </span>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-12-30 00:00" pubdate>
+        2019年12月30日 凌晨
+      </time>
+    </span>
+  
+</div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      12.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      126
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">香港乱局的起源,演变及趋势</h1>
+            
+            <div class="markdown-body">
+              <h1 id="香港乱局的起源-演变及趋势"><a href="#香港乱局的起源-演变及趋势" class="headerlink" title="香港乱局的起源,演变及趋势"></a>香港乱局的起源,演变及趋势</h1><p>对于这种问题，我比较倾向于结合完整的事件发展看待问题。割裂的读一些新闻自媒体既容易被“洗脑”，又缺乏对事物的合理认识，很难形成大局观看待事物发展趋势。借助此次机会，收集整理香港乱局的起源，历史大背景，社会背景，以期加深对此次事件的认识，结合网上对此事的评价，说法，总结自己的收获。</p>
+<p>网上对此问题众说纷纭，大致有这几种比较合理的说法：</p>
+<ul>
+<li>香港问题由来已久，从历年的七一游行（香港七一游行是香港自主权移交以来最为持续的大型活动之一）自03年起游行人数上万，以及游行口号可以看出，这是中国大陆与香港的矛盾，为了所谓的民主，自由，而实际上是对西方普世价值的盲目崇拜。</li>
+<li>政治因素：香港政府自97年回归后，主要权力领导集团依然直接或间接受到外国势力的影响。尤其是美国CIA势力的侵入，意图通过扰乱香港，争取美国利益，挽救CIA在美国本土的颓势。</li>
+<li>文化因素：由于历史原因，中国和香港历史严重割裂，从政治制度到语言文字都有巨大差异。自97年回归以来，在通识教育以及高等教育存在重大问题。</li>
+<li>经济因素：香港房地产泡沫，产业结构单一，错失发展先进制造业的机遇，民生问题不好调解。</li>
+</ul>
+<p>参考：</p>
+<ul>
+<li>维基词条：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%B8%83%E4%B8%80%E9%81%8A%E8%A1%8C#2019%E5%B9%B4">https://zh.wikipedia.org/wiki/七一遊行#2019年</a>，<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9C%8B%E5%A4%A7%E9%99%B8%E8%88%87%E9%A6%99%E6%B8%AF%E7%9F%9B%E7%9B%BE">https://zh.wikipedia.org/wiki/中國大陸與香港矛盾</a></li>
+<li>陈平，中国经济学家、理论物理学家，自称研究经济问题的物理学家。北京大学国家发展研究院（前身中国经济研究中心）教授、博士生导师（2013年退休）<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av74031654">https://www.bilibili.com/video/av74031654</a></li>
+<li>宁南山：从产业和教科书看个人与香港的前途命运<a target="_blank" rel="noopener" href="https://www.zhihu.com/people/ningnanshan/posts">https://www.zhihu.com/people/ningnanshan/posts</a></li>
+</ul>
+<h1 id="运动过程"><a href="#运动过程" class="headerlink" title="运动过程"></a>运动过程</h1><p><em>发起初期</em></p>
+<ul>
+<li>3月15日，香港众志多名成员在政府总部抗议修订《逃犯条例》，其间有示威者进入政府总部内东翼大堂静坐，最终有9人被警方以“强行进入罪”拘捕，这是反修例运动首次有人被捕。</li>
+<li>3月31日，民间人权阵线发起反对《逃犯条例》修订草案的首场游行。大会统计共有1.2万人参与，警方称高峰期有5,200人。</li>
+<li>4月28日，民间人权阵线第二次发起反对修订草案的游行。民间人权阵线称有13万人参加，警方指最高峰有2.28万人，皆创下2014年雨伞革命以来的民主派游行纪录，亦创下林郑月娥上任以来的纪录。</li>
+<li>6月9日，民间人权阵线再度发起示威游行，抗议修订草案。大批身穿白衣的市民参与，民间人权阵线表示有103万人，警方指高峰有24万人。</li>
+<li>6月12日，立法会预定恢复修订草案的二读审议，大量示威者围堵、占领金钟立法会综合大楼周边道路抗议，高峰时逾4万人参与，其后引发暴力冲突。</li>
+<li>6月15日，反对《逃犯条例》修订草案的梁凌杰坠楼自杀身亡.</li>
+<li>6月18日，林郑月娥就修订草案公开道歉，拒用“撤回”字眼，并暗示不会辞职。</li>
+<li>6月30日，立法会议员何君尧发起“630撑警察，保法治，护安宁”集会。大会称有16.5万人出席，警方称最高峰有5.3万人。</li>
+</ul>
+<p><em>冲突升级</em></p>
+<ul>
+<li>7月1日，立法会冲突。</li>
+<li>7月3日,特首邀大专学生会闭门会议。</li>
+<li>7月14日，沙田区游行，无线电视商场活动被狙击.</li>
+<li>7月20日，警捣破“爆炸品仓库”，“藤条教仔”论。</li>
+<li>7月21日，港岛区游行，元朗袭击事件。</li>
+<li>7月28日，大批示威者在集会后前往中央人民政府驻香港特别行政区联络办公室，投掷砖块与竹枝，以及在多处纵火。</li>
+</ul>
+<p><em>陷入僵持</em></p>
+<ul>
+<li>8月2日，公务员参与“公仆仝人，与民同行”集会。</li>
+<li>8月3日，市民发起“旺角再游行”，一队按原定路线游行，数百名示威者则“快闪”堵塞海底隧道、向尖沙咀警署丢掷砖块，黄大仙区街坊则包围警车，警方在三区施放催泪弹。</li>
+<li>8月4日，示威者在将军澳、西区集会，“快闪”方式与警方对峙，一度瘫痪海底隧道。示威者放火焚烧杂物，警方在铜锣湾发射催泪弹</li>
+<li>8月11日，示威者在深水埗及铜锣湾集会游行，其后冲突扩散至尖沙咀、葵涌等。对峙双方升级武力，警署遭投掷汽油弹，警方在港铁葵芳站施放催泪弹、又在港铁太古站内近距离约2米向示威者发射胡椒弹，并有乔装人士参与拘捕，亦有示威者怀疑遭射中而眼球破裂。</li>
+<li>8月12日，逾1万名抗议人士至机场举行“警察还眼”大规模集会活动，大批人群堵塞离境大堂，导致机场停摆瘫痪。</li>
+<li>8月20日，林郑月娥承诺马上构建民间对话平台化解分歧矛盾，并扩大独立监察警方处理投诉委员会审视。8月21日，示威者在元朗站静坐，晚间演变成警民对峙。</li>
+<li>8月23日，林郑月娥与前官员会谈，呼吁抗议者“解开死结”。</li>
+<li>8月31日，游行后的示威者最少在6区纵火，警方出动人群管理特别用途车，并在维多利亚公园开枪示警。</li>
+</ul>
+<p><em>政府退让</em></p>
+<ul>
+<li>9月1日，示威者阻塞机场道路、机场快线交通，影响大批旅客。之后示威者在东涌站毁损设施与射水，再徒步撤退至青马大桥。</li>
+<li>9月4日，林郑月娥提出四项行动回应五大诉求，将正式动议撤回修订《逃犯条例》草案，并将到基层与市民对话。</li>
+<li>9月6日，数百名市民要求港铁公开闭路电视片段，之后在太子站和旺角站爆发冲突。</li>
+<li>9月16日，政策创新与统筹办事处成立“对话办公室”，由创新及科技局前常任秘书长卓永兴担任总监，以协调特首早前提出成立的对话平台。</li>
+<li>9月28日，阿里巴巴集团旗下的《南华早报》引述消息指，行政长官林郑月娥宣布正式撤回条例草案前，曾经请示中共总书记习近平，并得到其批准，引起外界对中共当局直接插手香港事务的质疑。</li>
+</ul>
+<p><em>暴力升级</em></p>
+<ul>
+<li>10月1日，是中华人民共和国建国70周年，香港多区爆发大规模冲突和暴力破坏，多个商场及店铺都要关门，多个港铁站亦先后宣布关站，多区造成了严重破坏。警方在下午四时许在荃湾海坝街一带清场期间，有一名18岁示威者曾志健被警方近距离以实弹枪击，左胸口中枪倒地，随后送往玛嘉烈医院进行治疗，警方稍后承认有示威者中弹受伤。这是反对逃犯条例修订草案运动大规模爆发后三个月来警方首度以实弹枪击击伤示威者。</li>
+<li>10月3日，多区继续发生冲突，大批穿黑衣人包括在荃湾、铜锣湾、将军澳、屯门、黄大仙等地，先以杂物堵路，进而展开破坏行动，所到之处交通灯、栏杆被毁，中资或被指爱国人士所持的店铺逐一被毁。</li>
+<li>10月4日，香港特区政府行政会议召开特别会议，处理“禁蒙面法”问题。</li>
+<li>10月4日至10月9日期间，美国多个界别就示威活动表态。先是NBA休斯顿火箭队总经理达雷尔·莫雷表态支持香港示威，遭到内地官媒及网民批评。及后香港电竞选手“聪哥”因高呼“光复香港，时代革命”的口号而被暴雪娱乐取消资格、没收奖金以及停赛。继而苹果公司在中国《人民日报》的施压下，宣布将提供显示警队位置的“HKmap.live”应用程序下架。</li>
+<li>10月中旬起，外界认为示威运动开始缓和，人数开始减少，运动的冲突亦由街道转至立法会等处。不过警民双方的武力程度并没有减低，尤其警方在10月13日发现土制炸弹，乃运动以来首次。</li>
+<li>10月10日，香港市民自发庆祝中华民国国庆日，多处可见青天白日满地红。同日晚上，中文大学举行对话会，女学生吴傲雪发言时除口罩，声称警方性暴力和希望校长谴责警方暴行。校长段崇智最终在同月18日发声明谴责警暴，随即引起前行政长官梁振英和中国的《人民日报》抨击。</li>
+<li>10月20日，九龙游行中警方水炮车向尖沙咀清真寺正门喷射蓝色水剂，事后警方于社交平台Facebook表示误中清真寺的正门及大闸，正联络清真寺首席教长及穆斯林社区领袖解释事件及表达关注。</li>
+<li>10月18日，触发是次运动的台湾杀人案疑犯陈同佳决定自首，希望特区政府安排手续，但台湾拒绝陈同佳入境，令港台关系紧张。</li>
+<li>10月23日上午九时正，陈同佳结束服刑，离开壁屋监狱，逾百名记者在场通宵守候。陈同佳先后鞠躬向死者潘晓颖的家属和香港人道歉，并表示将会到台湾自首。但因为港台关系持续紧张，因此陈同佳或会在2020年总统选举后才会前往台湾。陈同佳出狱当日，保安局局长李家超在立法会上，正式宣布撤回《2019年逃犯及刑事事宜相互法律协助法例（修订）条例草案》，此时距离法案的公布已经将近10个月。</li>
+</ul>
+<p><em>示威激化</em></p>
+<ul>
+<li>11月3日，太古城中心内有市民自发举行人链活动，超过100人响应，分批站在商场不同楼层，亮起手机灯光，高叫口号和唱歌，并在六时许拉起人链，在商场内围绕一圈，有部分商户关门。晚上7时35分左右，一名操普通话的灰衣男子因政见问题，由太古城中心地下冲出，并在马路撞击一名女子，女子被撞倒地，赵家贤在场尝试调停，但男子不但没有理会，更再举脚踢女士的头部。灰衣男子其后在太古城中心商场地面出口与人争吵，曾叫喊“光复台湾”，继而持刀袭击抗议人士。其中两人分别背部和脚部受伤，大量流血。当区的太古城西区议员赵家贤更被灰衣男咬掉耳壳，同告受伤。在将军澳，约晚上11时有人于尚德广场附近天桥聚集，有警察到场并射胡椒喷剂，之后在唐明街及唐俊街的十字路口有防暴警察组成防线，与尚德邨对面的示威者对峙，并发射44枚催泪弹驱散在场人士。当中一名于香港科技大学就读的青年被发现倒卧在停车场2楼，怀疑从3楼堕下，昏迷送院抢救，留医伊利沙伯医院深切治疗部，情况危殆，后不治身亡。</li>
+<li>11月11日，网民发动“黎明行动”和“大三罢”，号召示威者晨7时起瘫痪交通，务求导致不参与的市民无法上班上学，“被罢工”、“被罢课”，多处地方有人堵路、阻碍港铁运作，令全港交通大混乱。早上时分，西湾河有交通警察向手无寸铁示威者开三枪实弹，导致两人重伤。其中一名21岁男子的右肾及部分肝脏受创需要切除，翌日才由危殆转为严重。同日葵芳有交通警察三度撞向示威者，至少两人受伤，当日被暂停职务、即时休假并接受调查。另外马鞍山有示威者与支持政府的男子爆发肢体冲突，及后被淋泼怀疑易燃液体并点火，该男全身即时陷入火海，男子最终危殆。双十一冲突最终导致至少99人受伤送院，其中2人危殆、4人严重。</li>
+</ul>
+<p>参考：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8F%8D%E5%B0%8D%E9%80%83%E7%8A%AF%E6%A2%9D%E4%BE%8B%E4%BF%AE%E8%A8%82%E8%8D%89%E6%A1%88%E9%81%8B%E5%8B%95">https://zh.wikipedia.org/wiki/反對逃犯條例修訂草案運動</a></p>
+<h1 id="事件背景"><a href="#事件背景" class="headerlink" title="事件背景"></a>事件背景</h1><h2 id="主权"><a href="#主权" class="headerlink" title="主权"></a>主权</h2><p><img src="https://gitee.com/windilycloud/PicGoPictureBed/raw/master/images/%E9%A6%99%E6%B8%AF%E4%B9%B1%E5%B1%80%E7%9A%84%E8%B5%B7%E6%BA%90,%E6%BC%94%E5%8F%98%E5%8F%8A%E8%B6%8B%E5%8A%BF_2.png" srcset="/img/loading.gif" alt="/香港乱局的起源,演变及趋势/Untitled1.png"></p>
+<h2 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h2><h3 id="第三方势力及反中势力的肆意妄为"><a href="#第三方势力及反中势力的肆意妄为" class="headerlink" title="第三方势力及反中势力的肆意妄为"></a>第三方势力及反中势力的肆意妄为</h3><p>他们利用金钱引诱香港年轻人实现自己的可耻目的！</p>
+<p>这个“地下钱庄”就是美西方反华势力、香港本土反对派势力祸港乱港的金库，其股权关系复杂，具体讲，主要有“一大四小”五个“股东”。</p>
+<p>“一大股东”即为美国的一些非政府组织（简称NGO）及金融资本集团。“大股东”在香港又物色具体的组织及合适的人选充当其“经理人”，构成了其庞大繁杂的“股权体系”。之所以雄踞“大股东”位置，那是因为“修例风波”暴力活动中一半以上的活动资金均来源于此。</p>
+<p>“四小股东”分别为专门成立的612人道支持基金会、香港的大学学生会、香港教会、小团体募捐。</p>
+<p><img src="https://gitee.com/windilycloud/PicGoPictureBed/raw/master/images/%E9%A6%99%E6%B8%AF%E4%B9%B1%E5%B1%80%E7%9A%84%E8%B5%B7%E6%BA%90,%E6%BC%94%E5%8F%98%E5%8F%8A%E8%B6%8B%E5%8A%BF_1.png" srcset="/img/loading.gif" alt="Untitled%20862dfe17b5714a83b32e79ee58112bc3/Untitled%201.png"></p>
+<p>参考：共青团中央：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/TGVfCQh9WnZ5NYQXqp49JQ">https://mp.weixin.qq.com/s/TGVfCQh9WnZ5NYQXqp49JQ</a></p>
+<h3 id="法律制度"><a href="#法律制度" class="headerlink" title="法律制度"></a>法律制度</h3><p>1997年以后，中国政府官方人士或机构发表过各种对《基本法》、《中英联合声明》所规定的“一国两制”制度的涵义的看法，在2010年以后，由于这种解释或理解将重心放到“一国”而非“两制”，例如《一国两制白皮书》、中联办主任张晓明的“特首超然论”、中共政治局常委张德江声称中央对特首有“实质任命权”等，这些言论被指引起中国政府对一国两制的实施逐渐偏移香港民众及国际社会对其的理解的疑虑，因此引发部分香港民众的怀疑。港府官员亦发表迎合这些论调的言论，更加加深部分港人对一国两制前景的担忧。《一国两制白皮书》中依照大陆体制，声称香港的法官是行政官员、并要求法官“维护国家主权及安全”、保护中华人民共和国政府利益，被部分人士认为是大陆政府无视受一国两制保护的香港司法独立，并试图改变香港司法、法律界的表态，也引起香港法律界的公开示威游行。中国内地与香港不同的法律体制也引起部分香港人以及法律界人士对一国两制的担忧。根据《基本法》规定，经终审法院提请，中国人大可以对基本法作出司法解释。而此机制在实际实施中，曾被香港政府用作使用行政手段推翻法庭终审判决的方法，因此引起部分人士对一国两制下香港司法权独立是否得到保障的担忧。其中，2016年的第五次人大释法是在香港法庭及政府没有要求的情况下，由全国人大主动进行的，其结果是直接影响了当时正在进行的具有政治色彩的香港法律案件的结果，因此在香港及国际上普遍认为代表了中国中央政府对香港的自治地位及司法独立的进一步干涉，加剧了部分香港人以及法律界人士对中央政府维持一国两制的意愿的担忧，并引起香港法律界罕见的公开示威游行。</p>
+<h3 id="选举制度"><a href="#选举制度" class="headerlink" title="选举制度"></a>选举制度</h3><p>根据《香港特别行政区基本法》第45条规定：香港特别行政区行政长官在当地通过选举或协商产生，由中央人民政府任命。行政长官的产生办法根据香港特别行政区的实际情况和循序渐进的原则而规定，最终达至由一个有广泛代表性的提名委员会按民主程序提名后普选产生的目标。由此，香港特区政府曾相继提出过2007年及2008年香港政治制度改革以及2012年香港政治制度改革提议，其中后者落实了一部分改革措施，但尚未达到普选的目标。在普选问题上具体的改革方案上出现了以香港泛民主派为代表的一方、与建制派及中国共产党和香港政府为代表的另一方之间的分歧。分歧主要围绕提名权设置及提名委员会的构成及权限的问题。泛民主派主张在香港实行的普遍选举，是由香港人公民提名、政党提名、提名委员会共同组成，缺一不可。然后直接选举行政长官及香港立法会议席，以落实民主选举制度之两大理念：参政权之“开放参与”和有“真正选择”，以正当程序保障“实质竞争”。而由香港政府所提议、获中国共产党支持的“普选”方案则主张依照基本法规定只有提名委员会有权提名，并且提名委员会的人数、构成和委员产生办法须按照选举委员会的人数、构成和委员产生办法而规定。但特区政府部分人士指出可由公民签名推举候选人交由提名委员会考虑。此举被指在概念和程序上尽量保留中华人民共和国中央政府对选举人、候选人资格、选举程序及当选人任命等方面的控制。民主派所提倡的普选诉求为了与后者之普选方案有所区别，而称作“真普选”。</p>
+<h2 id="经济"><a href="#经济" class="headerlink" title="经济"></a>经济</h2><h3 id="香港产业结构及经济地位"><a href="#香港产业结构及经济地位" class="headerlink" title="香港产业结构及经济地位"></a>香港产业结构及经济地位</h3><p>2019年的今天发生的香港暴乱事件，主力军就是香港的学生和年轻人，而这背后是香港的经济发展两极化，年轻人没有出路。</p>
+<p>从薪资分析</p>
+<p>我们从2018年5月-6月香港居民的工资中位数统计就可以看出来，</p>
+<p>男性月工资中位数为19900港币，女性为15300港币，</p>
+<p>每月工资中位数水平为17500港币，大约为15500人民币。</p>
+<p>从行业分析</p>
+<p>一个是香港精英的出路是非常狭窄的，要想拿高薪，只能到金融，地产，医生，老师等行业，而这些行业的雇佣人数是有限的。</p>
+<p>IT业也是高薪行业，但是香港的IT业没有发展起来，无法容纳大量就业，可惜了董建华的数码港规划。</p>
+<p><strong>从香港的中薪行业看，主要是制造业，运输和物流业和美容三个部分。</strong></p>
+<p>这本来应该是支撑香港就业的中流砥柱，而香港恰恰是面临制造业已经坍缩和外流，直接造成了香港经济丧失了大量中薪岗位。另外制造业实际上也是能够创造不少高薪岗位的，这也导致香港的精英在制造业方面基本没有出路。</p>
+<p>香港的运输和物流行业也是中薪行业，目前是依靠做转口贸易，依附于中国大陆和其他地方的制造业生存，但是香港作为转口贸易港口，其地位相对内地城市是在衰落的。</p>
+<p>参考：宁南山：从产业和教科书看个人与香港的前途命运<a target="_blank" rel="noopener" href="https://www.zhihu.com/people/ningnanshan/posts">https://www.zhihu.com/people/ningnanshan/posts</a></p>
+<p>对于经济问题，经济学家已经分析的比较透彻了，都有明显的共识，即香港以金融等服务业为主，错失了发展先进制造业的机遇，并且房地产行业泡沫严重等，这里不再赘述。值得一提的是，依我看经济问题对比政治文化问题来说不值一提。 </p>
+<h3 id="移民问题"><a href="#移民问题" class="headerlink" title="移民问题"></a>移民问题</h3><ul>
+<li>双非问题：2001年，香港终审法院根据《基本法》第24条宣判的庄丰源案确立，父母双方皆无香港居留权的中国大陆居民在香港所生子女可享有香港永久性居民身份。终审法院分析入境事务处处长提交的数据，从1997年7月1日至2001年1月31日，只有1,991名在香港出生的中国公民（母亲是非法入境、持双程证或短暂逾期居留香港，父亲也仅是在香港临时居留或不是香港居民）会因为判入境事务处处长败诉而成为香港永久性居民。这类儿童每月约46人，每年约555人。入境事务处处长根据此数据，承认没有迹象显示他被判败诉会导致大批人士立即从内地涌入香港。终审法院分析这些数据，亦不认为判入境事务处处长败诉会令香港承担任何重大风险。在庄丰源案终审判决前，香港特区政府曾经请求终审法院根据《基本法》第158条提请全国人民代表大会常务委员会解释《基本法》，不过终审法院没有采纳。终审法院在2001年7月20日判决政府败诉后，特区政府表示对判决失望，但是会尊重判决及采取适当措施执行判决。当时的香港大律师公会主席梁家杰对港府不绕过终审法院寻求人大释法表示欢迎。随着2003年自由行实施，大量中国大陆孕妇来香港产子。双非人士有从合法途径预约来港产子，亦有在无预约情况下闯急症室产子。2010年，配偶不是香港永久性居民的中国大陆孕妇在香港诞下32,653名婴儿，比起2001年的620名上升逾50倍。从2001年至2011年间，已获居港权的“双非婴儿”超过17万人，造成资源分配问题，例如产妇床位不足，引起香港社会不满，香港市民多次游行抗议，甚至引发了“蝗虫论”的争议。《信报》指，在民怨沸腾下，政府仍在寻求解决措施。至2012年梁振英接任行政长官后，他透过行政措施减少双非问题，但还有人以假结婚破坏此措施</li>
+<li>综援问题： 自2011年起，一篇主题为“四人新移民综援家庭月入2.2万元”的网络文章在香港流传，并附有电视新闻节目的截图，显示锺女士正在接受访问，然而最终被证明是谣言。有评论指出，不少香港人认为新移民抢占了公共资源，相关网络假文会挑动民众情绪，加剧中港矛盾。2013年，社区组织协会的何喜华协助单程证妇人孔允明就申请综援资格案上诉至终审法院，终审法院最后裁定，未居住满“7年”的香港人不能申领综援是违反香港基本法，并命令香港特别行政区政府回复至2004年之前的“1年”申领居港期。此裁决公开后，随即引发大批香港新移民到社会福利署查询及申请。大批香港市民批评，此政策一开，对香港综援制度有巨大的冲击，并且会增加香港的财政负担。据社会福利署提供的数字，2015年四人综援家庭的每月平均综援金额为1.3万元左右。</li>
+</ul>
+<h3 id="民生问题"><a href="#民生问题" class="headerlink" title="民生问题"></a>民生问题</h3><ul>
+<li>基本生活需求及贸易问题：中国官员指：没有中国大陆支持，香港就会变成一座死城[53]，香港人应饮水思源，每日饮水就要感恩。可是事实上，香港购买东江水之实用水价每立方米7.14港元（2016年，未计后续处理成本），被批评比一些国家的海水化淡高昂。</li>
+<li>旅游购物问题：香港发生过多宗导游与大陆旅客因购物而产生冲突的事件，包括：移民导游李巧珍在2010年接待安徽零团费旅行团游客时，不满他们购物少，以普通话大骂陆客；以及香港导游与安徽旅客争执事件等。由于大陆的食品及产品安全问题，以及香港和大陆之间由于税收造成的差价，许多大陆访客在香港大量购买食品和其他物品。其中2008年中国毒奶粉事件后开始，大陆对国产奶粉发生大规模的恐惧，大陆人和香港人大量从香港的零售渠道购买婴幼儿奶粉以满足大陆对进口奶粉的突生需求，香港发生婴幼儿奶粉供不应求的情况、香港人生活受到直接影响。由于香港政府缺乏应对政策，香港民众开始反对大陆访客及香港“水货客”将奶粉运往大陆，催生了“水货客问题”冲突。而另一方面，由于大陆游客的人数以及部分游客的强大购买力，香港一些商家开始视大陆游客而不是香港人为主要服务对象，或者对香港本地顾客实行额外限制，因此引起香港民众不满。包括D&amp;G禁止香港人摄影风波和agnès b.纯用简体字餐牌等事件。</li>
+<li>水货客问题：包括本港居民的水货客从香港利用各种途径运送货物到中国大陆（尤其指向通往深圳边境），引致对香港各区市民的日常生活造成的各种滋扰及社会问题。</li>
+<li>自由行问题：2003年7月28日起，中国中央政府与香港政府按照协议开始开放一些大陆城市居民以个人的方式（即无须参加旅行团或受邀请）赴香港旅行。结果是中国大陆旅游到访香港人次由2002年的638万大幅增加至2013年的4,075万，占当年访港旅客总数的比例由41.2%急升至75%。在2014年初，泛民一些激进党派发起保护“本土价值”运动，其后掀起“反中”情绪，一些激进成员经常在旅游区发起反对陆客的示威。由于一系列反陆客行为和言语在中国大陆网络广泛传播，同年底起，访港大陆客人次持续下跌。旅游业及零售业界认为，反“陆客”言行是成因之一，政府及建制派更直指反“陆客”是访港大陆客人下跌及零售业不景的主因。依据香港旅游发展局和香港政府统计处公布的数字显示，访港旅客人次大跌8.4%；其统计资料里中国大陆旅客人次更下跌9.8%，为384万5273人次；7月的零售业总额为港币376亿元，下跌2.8%。</li>
+</ul>
+<h2 id="文化"><a href="#文化" class="headerlink" title="文化"></a>文化</h2><h3 id="通识教育"><a href="#通识教育" class="headerlink" title="通识教育"></a>通识教育</h3><blockquote>
+<p>通识教育科2009年正式在香港高中推行，之后列入必考。现在香港学生上大学需要考四门：语文、英语、数学和通识，科目重要性可想而知。通识科包括六个单元，即个人成长与人际关系、今日香港、现代中国、全球化、公共卫生以及能源科技与环境。<br>根据环球网的报道，作为四大科目之一的通识课目，居然无须送审，没有统一课本，也没有标准答案，结果成为了宣传政治思想的绝佳工具。<br>具体有哪些问题呢？<br>在脸书上面，有一个香港爱国人士开的“声讨教协”的专栏，里面刊登了香港家长发来的香港中学通识教育的课本图片，请注意，香港不同学校会采用不同的通识课本，这是其中的一本。<br>具备两大特点，一个是对中国大陆的介绍以负面为主；<br>一个是出现大量的错误。<br>我们可以大概的看下，一个是人口一章说，中国人口素质偏低，<br>理由是15岁以上人口平均教育水平仅达初中三年级，只与美国一百年前的水平相若。但这是过时的数据，实际上我国2018年劳动年龄人口（从参加工作到退休）平均受教育年限已经达到10.5年，更为重要的是，我国的中老年人普遍是在上世纪70-90年代受的教育，彼时教育水平时长自然受限制。<br>而中国大陆年轻人的受教育水平大大高于老年人，<br>2018年中国大陆大学毛入学率已经达到48.1%，也就是同龄人中48.1%可以受到大学教育，这在全球范围内已经是极高水准。我们再看第二个例子，大量使用错误和老数据。<br>2019年的今天，居然还说中国大陆农村在收农业税，里面画了一张插图，是一个愁眉苦脸的中国大陆农民，一个人对农民说“本村明年要兴建新政府大楼，故此要多收税费”实际上农业税在2006年1月1日已经取消了，而香港现在居然还在教授此内容，更有趣的是，用的是上世纪90年代和2001-2003年的数据。<br>这显然根本无法体现中国大陆2019年的现状。<br>类似的里面还有大量描述农村三农问题，城乡差距扩大的内容，缺乏正面描述。<br>对于香港学生而言，很容易产生中国大陆农村居民水深火热毫无希望的的感觉。</p>
+</blockquote>
+<p>类似于上面的表述数不胜数，只收录对中国大陆的负面影响，对现在经济腾飞的大陆绝口不提，认为西方国家对中国的报道和信息是完全客观的，不带有立场和偏见的，因此全盘引用。这样毫无根据的一味反华，只是祸害了香港的前途，并且是从“根”上带坏了学生！教科书不经过审核还不够，香港大学，香港城市大学，香港科技大学等知名大学居然存在暗地资助学生的组织！由此可见，香港问题用普通的方法是治标不治本的！</p>
+<h3 id="政治概念"><a href="#政治概念" class="headerlink" title="政治概念"></a>政治概念</h3><p>论者梁亦华指出，一些民主、自由等香港学生认为无可争辩的普世价值，在内地却与失败者（Loser）的贬义联结在一起。情况犹如清末人们认为，主张洋务改革者都是市井无赖和科举失败者一样，从而形成政治概念上的认知鸿沟。</p>
+<h3 id="文物及建筑"><a href="#文物及建筑" class="headerlink" title="文物及建筑"></a>文物及建筑</h3><p>香港政府在1997年后后采取了一些明显的“去殖民”政策，特别是受到来自与中国政府有关联的人士压力后，在2015-2016年“加大力度”“去殖民”，例如拆除邮筒上的历史性英王纹章等。这一类“去殖民”政策没有得到香港民意的一致支持，持反对意见的民众认为这一类政策不尊重香港的历史文化记忆，其目的是迎合北京当局的政治喜好，佐证了一部分民众对当届香港政府将中央政府的政治使命置于香港民意之上的担忧。于此相关，香港政府在1997年后的发展政策中，时有拆除或改造历史建筑的事例，例如拆除历史性的皇后码头，这些发展计划也引起了部分民众较大的反对。虽然文化“去殖民”并非大陆民众造成，但与中国政府政治要求的联系使得“去殖民”政策加剧了一些香港民众对大陆政府及文化的反感及对一国两制前景的担忧。</p>
+<h3 id="传播媒体"><a href="#传播媒体" class="headerlink" title="传播媒体"></a>传播媒体</h3><p>苹果日报</p>
+<p>我们可以看看维基百科对苹果日报的介绍：</p>
+<blockquote>
+<p>《苹果日报》（英语：Apple Daily，1995年6月20日－）为香港上市公司壹传媒旗下繁体中文报纸，由大股东黎智英所创立，香港畅销中文报章之一[4]。<br>政治立场方面，自1997年香港主权移交后，大部分香港传媒基于自身利益而自我审查[5]，淡化涉及中国共产党的负面消息，而《苹果日报》是少数仍然会大力批评中国政府、香港政府及建制派的报章，被普遍认为是香港目前唯一未被“染红”的媒体[6]，因而一直受到中国大陆封禁[7]。2003年5月2日，壹传媒进入台湾市场，发行了《苹果日报》台湾版。2012年11月，壹传媒大股东黎智英计划将在台湾的所有业务出售予辜仲谅，然该计划在2013年3月取消，改为深耕台湾。</p>
+</blockquote>
+<p>我怀着好奇心点进了苹果日报的官网，简直身心都受到了严重污染！这明明就是港独的聚居地，身为在传播媒体，缺乏客观中立，从头的到脚充斥着反中色彩，恶言恶语张口就来，很难想象 这是一种怎么样的存在。而2016年一项来自香港中文大学的调查结果显示，大学生认为最受市民喜爱的新闻机构中，苹果日报的喜爱程度属中等偏高，立场偏本土，真的怀疑香港年轻人到底受了何种蛊惑？这里我就不放相关证据了，有碍观瞻，看过的人都应该视CNN，苹果日报这样的传播媒体为耻辱！</p>
+<p>CNN</p>
+<ul>
+<li>在2008年西藏骚乱中，中华人民共和国政府、中国官方宣传机构CCTV与部分网民指责CNN“采用裁剪照片”，虚构新闻的造假手法编辑其网站内容，部分中国民众对CNN进行了抵制和反击，其中包括中国网民建立的网站Anti-CNN。其后，因部分中国网民抵触心理强烈，在中国网络逐渐开始流行“做人别太CNN”的流行语，及其同名反CNN歌曲《做人别太CNN》，尽管早已有说法“做人不能太CCTV”。CNN记者则表示，裁剪照片是因为技术上无法同时将左右两边包括进去。</li>
+<li>2008年4月9日，CNN在转播北京奥运火炬在旧金山传递时，主持人卡弗蒂曾发表涉中国争议言论，据中国大陆媒体的翻译理解，指“中国产品是垃圾”（原文为junk，废物、垃圾、劣质次品），及指过去五十年里他们（原文为They）基本上一直是一帮暴民和匪徒（原文为goons and thugs）。2008年4月15日，中华人民共和国外交部发言人姜瑜就CNN主持人涉华争议言论，表示“震惊和强烈谴责”，要求CNN和其节目主持卡弗蒂本人收回其言论，并向华人道歉。CNN表示，卡弗蒂所说的“一群无赖和暴徒”指的是中华人民共和国政府，而非中国人民，不过此消息发布后，中华人民共和国政府表示不承认此道歉，再次要求卡弗蒂收回相关言论并向全体中国人民道歉。</li>
+<li>2008年4月19日，数千民众在洛杉矶的CNN大楼门前集会抗议卡弗蒂以及CNN对中国争议言论报导及评论。同日，在亚特兰大的CNN总部门前也有较小规模的抗议。</li>
+<li>2013年10月28日，中国北京天安门广场发生吉普车冲撞金水桥事件，该事件之后被中国警方称为“重大事件”，并称其为北京地区发生的首宗“恐怖袭击事件”。CNN等媒体质疑中方对事件定性，批评中国的民族宗教政策，对涉案者表示同情。随后，中国外交部发言人洪磊称，CNN的有关言论是“对恐怖分子的纵容”，并称美国反对在反恐问题上实行“双重标准”。部分中国网民亦对CNN的有关言论表示不满。</li>
+<li>2019年10月23日，英国警方在埃塞克斯郡某工业园一辆货车货柜内发现39具尸体，生命损失之惨重震惊国际社会。在英国警方未确认死者国籍信息前，北京时间10月25日下午的中国外交部例行记者会上，CNN驻华记者大卫·卡尔弗（David Culver）向外交部发言人华春莹提问时称“本月初中方举行了国庆相关活动。但中国公民却通过这种极端危险的方式离开中国，他们是出于何种动机？”华春莹在表达对死者同情的同时，严厉批评CNN记者先入为主的认定死难者为中国人，质疑其提问出发点有问题，并指这反映出其思想深处或者美国一些媒体的问题，反呛该记者此举究竟是希望得到什么答案。值得关注的是，在卡尔弗提出该问题前，CNN声称中国掐断了其关于“39名中国人死于英国货车”的直播报道，疑似暗示中国当局封锁信息。但实际上该事故在中国互联网上已然获得大量关注，多个关键词《南方日报》29日的一篇评论称，CNN“就是在吃人血馒头”。2019年11月7日，英国警方正式发文表示确认所有死者均为越南人，且已经完成了身份识别。中国网民对CNN立场先行，无视新闻道德的行为表示强烈的谴责，频频在社交网络上要求CNN向中国道歉。登上社交媒体微博的热搜榜。因此环球网批评CNN通过谎言塑造一个政府消极形象的行径。</li>
+</ul>
+<p>另外还有纽约时报，华尔街日报，英国BBC等外国媒体都若有若无的抹黑中国，甚至在主流媒体FaceBook,Twitter上更是不遗余力的恶意捏造，发酵反中言论。这种颠倒是非着实让人感到恶心，我都怀疑自己生活在水生火热之中，急需外星人拯救！</p>
+<h1 id="其他国家的借鉴意义"><a href="#其他国家的借鉴意义" class="headerlink" title="其他国家的借鉴意义"></a>其他国家的借鉴意义</h1><h3 id="乌克兰颜色革命"><a href="#乌克兰颜色革命" class="headerlink" title="乌克兰颜色革命"></a>乌克兰颜色革命</h3><p>是指2004年至2005年围绕2004年乌克兰总统大选过程中由于严重贪污、影响选民和直接进行选举舞弊所导致的在乌克兰全国所发生的一系列抗议和政治事件。在2004年10月31日的乌克兰总统大选中由于没有任何候选人达到法律规定的50%的多数，因此在同年11月21日在得票最多的两名候选人维克托·尤先科和维克托·亚努科维奇之间举行重选。但是众多乌克兰国内外观察员报道说官方宣布的亚努科维奇获胜的结果是舞弊导致的，同时这也是公众普遍感觉到的。这个选举舞弊导致了这场抗议。尤先科的选举活动中使用橙色作为其代表色，因此这场运动使用橙色作为抗议的颜色。这个运动的标志是橙丝带和一面书有Так! Ющенко!（“对！尤先科！”）的旗。选举结果被公布后上百万抗议者聚集在乌克兰首都基辅的市中心独立广场及河腊沙机大街，尤先科的支持者建立了一个24小时不断被占据的帐篷城，同时在乌克兰全国爆发了一系列由反对派组织的抗议、静坐、大罢工等事件。</p>
+<p>颜色革命（Colour revolution），又称花朵革命，是指20世纪80、90年代开始的一系列发生在中亚、东欧独联体国家的以颜色命名，以“和平和非暴力”方式进行的政权变更运动，而且这些运动有向包括中东的一些地区在内的地方蔓延的趋势。参与者们以拥护自由民主与普世价值为目标，通常是现有政权的反对者，立场亲西方和亲美。他们通常采用一种特别的颜色或者花朵来作为他们的标志。</p>
+<p>目前史上多个颜色革命在格鲁吉亚、乌克兰和吉尔吉斯等国家取得成功，推翻了原来的亲俄政权，在西方国家的支持下建立了自由民主政府，并成为亲西方和亲美政权。部分伊斯兰国家新政府建立之后，因世俗派与伊斯兰主义派的争斗，未能建立有效的民主政权，导致政治争端不断（如埃及）。</p>
+<p>我们可以了解到</p>
+<ul>
+<li>乌克兰颜色革命成功了，但人均GDP从2012年的3872.53美元到2015年2124.62美元再到2018年2963.57美元。比印尼，菲律宾，委内瑞拉还低，甚至不到泰国的一半。值得一提的是，自此以后，乌克兰被称为“欧洲的泰国”，色情业成了其重要经济来源。</li>
+<li>从近期的英国脱欧，英国伦敦、伯明翰等30多座城市同时爆发大规模抗议示威活动，智利爆发大规模抗议，伴随大量暴力冲突等政治活动。我们可以看出，资本主义国家存在明显的问题，普世价值观存在明显问题。刚学完马列主义的我知道，只有坚持马克思主义，毛泽东思想，邓小平理论，三个代表重要思想，科学发展观，以及有中国特色的社会主义道路才能发展的更好！毕竟从目前看来，我们的价值观明显更先进啊！</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>经过以上问题的收集整理和分析，我更倾向于香港乱局的起源主要有两个：</p>
+<ul>
+<li>新闻传播媒体的恶意报道，通识教育高等教育的严重过失，致使对普世价值理解严重偏差</li>
+<li>香港被有心人利用，打造的一场闹剧</li>
+</ul>
+<p>我作为一个普通人，接受着正常教育，从小到大对自由民主并没有产生多大兴趣，我关心的是考试考的怎么样，课后应该怎样玩，我在游戏里应该如何操作等等鸡毛蒜皮的事。我对自由的理解无非就是“若为自由故，爱情皆可抛”，不被殖民主义压迫，自由生长；民主就是集思广益，将社会最优化。当然，这些虽然都很重要，但我生在这样的社会，一点也不在乎。经过几天的查阅，上推特和人“唠嗑”，我发现这就是文化的差异，说不好听点就是他们被“洗脑”了。每个人生来就处于一种特定的环境中，受到文化熏陶，认为周围的一切都很自然。我不能说谁的价值取向更好，毕竟由特定历史背景造成的社会正是文化所维系的。正如封建王朝崇尚儒家，中东的伊斯兰教，基督教，西方的维京人。但问题是事物总是在动态变化中的，现在你和人提到你崇尚三从四德是显得那么无知。从洋务运动，戊戌变法，辛亥革命，新文化运动教会我们的不是铭记历史，而是鉴往知来！我们不求接受他人的文化，但我们需要以开放宽容的态度吸纳不同文化，取其精华去其糟粕，这才是进步之本。话说回来，香港废青迷信西方普世价值，甚至希望美国英国给他们自由民主，令人感到可悲！美国深陷信任危机，背负巨额外债，贫富差异严重等；英国脱欧，智利地铁涨价三毛钱就大规模暴力抗议？资本主义严重的弊端尤其突兀，正常接受教育的人都应该理解，况且根本没绝对的自由和民主。一群人缺乏自我思考的能力，凭借着年轻气盛，将承担未来的苦果！</p>
+<p>另一方面，资本主义国家打压我国由来已久，社会主义国家的崛起将打破被垄断的世界蛋糕。日本，韩国，越南等国家均有美军军事基地，虽为主权国家，却被各种原因掣肘，独立国家名存实亡。从三星垄断韩国，致政商不分家，而IT产业明显受制于美国，近日甚至取消了芯片研发，全部与高通，麒麟，ARM合作可以看出，韩国是一个发育“畸形”的国家，这些问题没法解决将是大隐患，毕竟韩国总统非死即伤。而日本资源高度依赖进口，和中方又在文化方面冲突，理所当然是美国的把柄。总之，在中国崛起之前，世界尽在美国掌控。如今一超多强的时代将会过去，美国急眼了。据一些小道消息，即官方未承认或说明但有根据的消息。自香港回归美国中央情报局CIA下了一盘大棋，利用资本对香港教育动手脚，利用一国两制的漏洞对政治动手脚，形成了在这种环境下被人为塑造了的反中文化。这也是香港人没有国家的概念，一味的反中，坚持凡是中央政府，香港政府，建制派的决议都认为是错误的。这想想就可怕！而我在推特上接触的人几乎都是先入为主的反中！这样导致的结果就是香港成了反中的基地！</p>
+<h2 id="趋势"><a href="#趋势" class="headerlink" title="趋势"></a>趋势</h2><p>对于香港乱局，很多人纳闷中央政府的决策。按理说香港这样的弹丸之地不是随便收拾的吗？再退一步说，香港这些隐患应该早就看出来了吧。我这里给出一种解释：中央政府高估了港府的能力。从董建华数码港计划，建屋计划到林郑月娥的建屋计划，每一任行政长官都在不遗余力的改善民生问题，消灭隐患。奈何总是有保守派阻挠，08年又金融危机，这就像赶鸭子上架一样，有心无力啊。其根本原因就是港府施政能力低，这是由社会性质决定的，改起来触碰多方利益！百足之虫，死而不僵。而事态已发展到这个地步，最好的方法就是破而后立！毛主席说过，越大的动乱就是越大的机会，大乱能大治！这样复杂的社会，类比于新文化运动之前的中国，只有彻底革除“封建思想”，才能接受“新文化”。香港的闭关锁区，只有原地爆炸，才能自我救赎。而中央政府只需要“灾后重建”即可。之前供水供电供水果的渠道已经建立，深圳自贸区发展良好，甚至放开落户政策，这都证明着重建都不是事儿。而我们只需祈祷他们早一点觉醒，找到发展之路！只要他们回心转意，那就是中国的好儿子！</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%A4%A7%E4%BA%8B%E4%BB%B6%E5%88%86%E6%9E%90/">大事件分析</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%A4%A7%E4%BA%8B%E4%BB%B6%E5%88%86%E6%9E%90/">大事件分析</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/01/24/%E6%88%91%E8%AE%A4%E8%AF%86%E7%9A%84%E4%B8%96%E7%95%8C%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">我认识的世界是怎样的</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/05/09/%E5%87%A0%E4%BD%95%E5%85%89%E5%AD%A6%E5%9F%BA%E6%9C%AC%E5%AE%9A%E5%BE%8B%E4%B8%8E%E6%88%90%E5%83%8F%E6%A6%82%E5%BF%B5/">
+                        <span class="hidden-mobile">几何光学基本定律与成像概念</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

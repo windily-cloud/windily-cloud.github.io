@@ -1,25 +1,725 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
 
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
-{% block page_class %}page-post-detail{% endblock %}
 
 
-{% block content %}
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>双极型晶体管 - Hexo</title>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>windilycloud</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
+</nav>
 
-{% endblock %}
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="双极型晶体管">
+              
+            </span>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-04-23 21:52" pubdate>
+        2019年4月23日 晚上
+      </time>
+    </span>
+  
+</div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      71
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">双极型晶体管</h1>
+            
+            <div class="markdown-body">
+              <h1 id="电压信号如何放大"><a href="#电压信号如何放大" class="headerlink" title="电压信号如何放大"></a>电压信号如何放大</h1><p>在电路的学习中，知道四种受控源：</p>
+<ul>
+<li><p>电压控制电压源：对应于变压器，但变压器只能放大高频信号。</p>
+</li>
+<li><p>电流控制电压源： 不存在这种器件</p>
+</li>
+<li><p>电压控制电流源：对应于结型场效应管JFET，金属氧化物半导体场效应管MOSFET（暂不讨论）</p>
+</li>
+<li><p>电流控制电流源：电流和电压通过电阻进行转换，对应于双极型晶体管BJT</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5CCCCS%E5%AE%9E%E7%8E%B0%E7%94%B5%E6%B5%81%E6%94%BE%E5%A4%A7.png" srcset="/img/loading.gif" alt="1555393411916"></p>
+<p>$u_{O U T}=-i_{O U T} R_{L O A D}=-k i_{I N} \times R_{L O A D}=-k \frac{U_{I N}}{R_{I N}} \times R_{L O A D} |$，其中k是电流源控制系数</p>
+</li>
+</ul>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%E5%8F%8A%E5%85%B6%E7%AE%80%E5%8C%96%E6%A8%A1%E5%9E%8B.png" srcset="/img/loading.gif" alt="1555393075771"></p>
+<p>由此可实现电压信号的放大。</p>
+<h1 id="认识双极型晶体管"><a href="#认识双极型晶体管" class="headerlink" title="认识双极型晶体管"></a>认识双极型晶体管</h1><p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E6%99%B6%E4%BD%93%E7%AE%A1%E7%AC%A6%E5%8F%B7.png" srcset="/img/loading.gif" alt="1555393748672"></p>
+<p>由半导体工艺制成，其中P，N代表P型半导体，N型半导体。从中引出管脚，即电极，如上图所示。be，ce之间类似于一个PN结，单向导通。其方向由箭头方向指明。</p>
+<h2 id="基本电流关系"><a href="#基本电流关系" class="headerlink" title="基本电流关系"></a>基本电流关系</h2><p>定义流经b极的电流 为$i_b$,同理有$i_c,i_e$,满足基尔霍夫电流定律：$i_{\mathrm{B}}+i_{\mathrm{C}}=i_{\mathrm{E}}$</p>
+<p>放大状态时，集电极电流唯一受控于基极电流，与ce两端电压无关：$i_{\mathrm{C}}=\beta i_{\mathrm{B}}$</p>
+<h2 id="NPN型晶体管的伏安特性"><a href="#NPN型晶体管的伏安特性" class="headerlink" title="NPN型晶体管的伏安特性"></a>NPN型晶体管的伏安特性</h2><h3 id="输入伏安特性"><a href="#输入伏安特性" class="headerlink" title="输入伏安特性"></a>输入伏安特性</h3><p>指基极电流$i_b$与发射结电压$U_{\mathrm{BE}}$之间的关系，这种关系也受到 $U_{\mathrm{CE}}$的影响。</p>
+<p>在multisim中仿真，搭建如图所示电路，直流扫描发射结电压，从0-1V，增量为50mv；直流扫描$U_{\mathrm{CE}}$，从0-5V，增量为1v.</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5CBJT%E4%BB%BF%E7%9C%9F%E7%94%B5%E8%B7%AF.png" srcset="/img/loading.gif" alt="1555398423135"></p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5CBJT%E8%BE%93%E5%85%A5%E7%89%B9%E6%80%A7%E6%9B%B2%E7%BA%BF.png" srcset="/img/loading.gif" alt="1555398496481"></p>
+<p>上述结果表明：</p>
+<ul>
+<li>$U_{\mathrm{CE}}$大于0后对输入特性曲线几乎毫无影响，当其等于0，曲线向左移动。</li>
+<li>发射结电压$U_{\mathrm{BE}}$对$i_b$影响显著。因为$i_B$与$U_{\mathrm{BE}}满足i_{\mathrm{B}}=I_{\mathrm{S}}\left(e^{\frac{u_{\mathrm{BE}}}{U_{T}}}-1\right)$，其中$I_s$是反向饱和电流，每个晶体管都不一样，很小。$U_T$是热电压，与绝对温度成正比，27摄氏度时大概为26mv。显然，当U_{\mathrm{BE}}远大于$U_T$,成指数上升趋势。</li>
+</ul>
+<h3 id="输出伏安特性曲线"><a href="#输出伏安特性曲线" class="headerlink" title="输出伏安特性曲线"></a>输出伏安特性曲线</h3><p>指在确定的基极电流$i_b$的情况下，$U_{\mathrm{CE}}$与$i_c$之间的关系</p>
+<p>同样的仿真电路，直流扫描两个电压：</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5CBJT%E8%BE%93%E5%87%BA%E7%89%B9%E6%80%A7%E6%9B%B2%E7%BA%BF.png" srcset="/img/loading.gif" alt="1555400173339"></p>
+<p>按上述电流关系$i_c$与$i_b$应该成正比，但当$U_{\mathrm{CE}}$变化在一定区域内并不满足关系。在两个小电压激励下$i_b$甚至还会反向。由此引出了输出伏安特性曲线中的区域划分。</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E8%BE%93%E5%87%BA%E7%89%B9%E6%80%A7%E6%9B%B2%E7%BA%BF%E5%8C%BA%E5%9F%9F%E5%88%92%E5%88%86.png" srcset="/img/loading.gif" alt="1555400721631"></p>
+<ul>
+<li>在饱和区$i_c$随$U_{\mathrm{CE}}$增大而增大</li>
+<li>在放大区，近似满足电流关系$i_c$与$i_b$成正比，与$U_{\mathrm{CE}}$无关</li>
+<li>在截止区，$i_c$有着极小的漏电流</li>
+</ul>
+<h1 id="搭建一个放大电路"><a href="#搭建一个放大电路" class="headerlink" title="搭建一个放大电路"></a>搭建一个放大电路</h1><p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E6%9C%80%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF.png" srcset="/img/loading.gif" alt="1555407417191"></p>
+<p>用晶体管搭建一个电路，实现对一个微小的正弦信号放大。首先给基极一个固定电压，在此基础上叠加一个微小的正弦信号，这个电压作用在输入特性曲线上，产生一个变化电流的波形，$i_c$是$\beta$倍的$i_b$，然后作用于电阻$R_c$上，最终实现放大。</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E5%B0%8F%E4%BF%A1%E5%8F%B7%E5%AE%9E%E7%8E%B0%E6%94%BE%E5%A4%A7%E8%BF%87%E7%A8%8B.png" srcset="/img/loading.gif" alt="1555407810039"></p>
+<p>图八中存在上高下矮的问题，在用仿真软件搭建实验电路的过程中，主要问题是怎样才能使图像不变形，因为我不知道怎么让三极管工作在放大区。</p>
+<p>下图是随意设置的一些参数，可以看到，十分的不和谐。这与理想状况出入有点大。</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E5%B0%8F%E4%BF%A1%E5%8F%B7%E6%94%BE%E5%A4%A7%E4%BB%BF%E7%9C%9F%E7%94%B5%E8%B7%AF.png" srcset="/img/loading.gif" alt="1555408084581"></p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E5%B0%8F%E4%BF%A1%E5%8F%B7%E6%94%BE%E5%A4%A7%E4%BB%BF%E7%9C%9F%E7%BB%93%E6%9E%9C1.png" srcset="/img/loading.gif" alt="1555408113408"></p>
+<h2 id="静态和信号耦合"><a href="#静态和信号耦合" class="headerlink" title="静态和信号耦合"></a>静态和信号耦合</h2><h3 id="静态和动态"><a href="#静态和动态" class="headerlink" title="静态和动态"></a>静态和动态</h3><p>根据欧姆定律，在知道器件电压和电流的情况下我们可以算出电阻。电压和电流动态改变，我们可以等效为一个动态电阻，大小为电压改变量与电流改变量的比值。对应到输出特性曲线上，静态电阻等于该点处与原点连线的直线斜率的倒数，动态电阻是切线斜率的倒数。</p>
+<p>对于一个晶体管来说，放大系数也有动态静态之分，幸运的是差距不大，一般应用下是假设不变的。</p>
+<h3 id="静态工作点"><a href="#静态工作点" class="headerlink" title="静态工作点"></a>静态工作点</h3><p>指的是放大电路的电源供电正常，在没有输入信号的状态，在输入输出伏安特性曲线上表现为一个静态的点。该点处的电压电流加下标Q来表示。有两个重要原因需要确定静态工作点：</p>
+<ul>
+<li><p>从输入端看，发射结电压可正可负，如果是零或者负的电压，三极管不导通$i_b$=0,此时输出也为0，所以下图肯定不行。</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AFv0.1.png" srcset="/img/loading.gif" alt="1555410605549"></p>
+</li>
+<li><p>从输出端看，三极管工作区域不能在截止区和饱和区，因此，取一个折中的静态工作点，即$E_c$的一半。可以用下图实现</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C1555412100245.png" srcset="/img/loading.gif" alt="1555412100245"></p>
+</li>
+</ul>
+<h3 id="阻容耦合"><a href="#阻容耦合" class="headerlink" title="阻容耦合"></a>阻容耦合</h3><p>在上面的仿真电路中，我就试图将直流电压源串联到交流信号源中，但实际情况是无法实现的，这是理想化的——除非它是一个变压器的副边。因为我们日常使用电源都是单端输出，负端是默认接地的，二者不能串联。</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C1555412354551.png" srcset="/img/loading.gif" alt="1555412354551"></p>
+<p>因此，给出了以上电路图解决了上述问题，我们来捋一下：</p>
+<ul>
+<li>在不影响静态工作点的情况下，将信号耦合到了输入当中：电容通交流隔直流。</li>
+<li>调整$R_c,R_b$可以控制静态工作点输出电压大小在$E_c$的一半附近。</li>
+<li>输出加一个电容，隔绝了直流对负载的影响</li>
+</ul>
+<p>总的来说，直流电源和电阻的作用就是营造一个信号放大的环境，阻容耦合的缺点是不能放大直流信号。除此之外，还有变压器耦合，直接耦合，光电耦合等。</p>
+<p>然后我搭了下面的电路：</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%88%90%E5%8A%9F%E7%9A%84%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF.png" srcset="/img/loading.gif" alt="1555570141720"></p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E7%BB%93%E6%9E%9C.png" srcset="/img/loading.gif" alt="1555570194630"></p>
+<p>可以看到：</p>
+<ul>
+<li>输入输出信号的相位不一致</li>
+<li>的确被放大了</li>
+<li>放大信号的确有点上矮下高</li>
+</ul>
+<p>实现的过程比较繁琐，注意以下之处：</p>
+<ul>
+<li><p>应先确定静态工作点，multisim里有计算的仿真按钮，自己也可以手动计算。首先要保证处于放大状态，这个$U_{\mathrm{CEQ}}$就决定了信号放大的阈值$U_{\mathrm{CE}}$应大于0.3，即此处电压幅值应小于$U_{\mathrm{CE}}-0.3$。<img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E9%9D%99%E6%80%81%E5%B7%A5%E4%BD%9C%E7%82%B9%E7%9A%84%E8%AE%A1%E7%AE%97.png" srcset="/img/loading.gif" alt="1555570526941"></p>
+<p>再根据这个最大电压幅值估算输入信号的幅值，应该是很小的，因为放大倍数一般很大。</p>
+<ul>
+<li>输入信号如果很大，在三极管基极信号就变形了<img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E8%BE%93%E5%85%A5%E4%BF%A1%E5%8F%B7%E5%A4%A7.png" srcset="/img/loading.gif" alt="1555572664111">，其后输出信号变形更严重<img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E8%BE%93%E5%85%A5%E4%BF%A1%E5%8F%B7%E5%A4%A7%E7%9A%84%E8%BE%93%E5%87%BA%E4%BF%A1%E5%8F%B7.png" srcset="/img/loading.gif" alt="1555572772738"></li>
+</ul>
+</li>
+<li><p>三极管的参数可以手动修改，在edit model里。</p>
+</li>
+<li><p>相位变化在加了电容后就改变了，加了一个电容变了90度，后面输出不知道变了多少</p>
+</li>
+<li><p>放大过程并不是上面那张图一致的变化，这只是个原理罢了。实际上根据仿真，加载发射极的电压比信号源还小。</p>
+</li>
+</ul>
+<h1 id="三极管的工作状态"><a href="#三极管的工作状态" class="headerlink" title="三极管的工作状态"></a>三极管的工作状态</h1><ul>
+<li>截止状态：基极几乎没有电流，一般认为发射结，集电结均反偏时处于此状态。此时都不导通，图就不贴了。</li>
+<li>放大状态：发射结正偏，集电结反偏。满足电流基本关系。</li>
+<li>饱和状态：此时$I_{\mathrm{CQ}}&lt;\beta I_{\mathrm{BQ}}$，且随$U_{\mathrm{CEQ}}$变化，任何状态下，只要$U_{\mathrm{CEQ}}&lt;U_{\mathrm{CES}}$就处于饱和状态，此时两电流几乎不增加。一般情况下，集电结，发射结均正偏为饱和状态。我们在原电路中将一个电阻改为5K，算静态工作点$U_{\mathrm{CEQ}}$是负数，显然不处于放大状态，所以$U_{\mathrm{CEQ}}=0.3V$，处于饱和状态，算出$I_{\mathrm{CQ}}=2.34$,仿真后等于2.374.<img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E9%A5%B1%E5%92%8C%E7%8A%B6%E6%80%81%E7%9A%84%E7%94%B5%E8%B7%AF.png" srcset="/img/loading.gif" alt="1555574205609"><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C1555574726110.png" srcset="/img/loading.gif" alt="1555574726110"></li>
+</ul>
+<p>由图得并没有怎么放大。</p>
+<ul>
+<li>倒置状态：指三极管接反了，发射结反偏，集电结正偏，这样不会烧了晶体管，但$\beta$ 下降严重。</li>
+</ul>
+<h2 id="如何判断三极管工作状态"><a href="#如何判断三极管工作状态" class="headerlink" title="如何判断三极管工作状态"></a>如何判断三极管工作状态</h2><p>放大结构：如果三极管实际电流方向和我们期望电流方向一致，即为放大结构。<img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E6%94%BE%E5%A4%A7%E7%BB%93%E6%9E%84.png" srcset="/img/loading.gif" alt="1555574990022"></p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E5%88%A4%E6%96%AD%E4%B8%89%E6%9E%81%E7%AE%A1%E5%B7%A5%E4%BD%9C%E7%8A%B6%E6%80%81.png" srcset="/img/loading.gif" alt="1555575023922"></p>
+<h1 id="图解法解静态工作点"><a href="#图解法解静态工作点" class="headerlink" title="图解法解静态工作点"></a>图解法解静态工作点</h1><p>静态工作点有三种解法：</p>
+<ul>
+<li>解析法：前提是知道输入输出特性曲线的函数，联立方程求解</li>
+<li>估算法：核心是假设$U_{\mathrm{BEQ}}=0.7V$,但这个估算是有误差的，结果不太准确。</li>
+<li>图解法：在特性曲线上画图，凭观察读出静态工作点的大致读数。</li>
+</ul>
+<p>对于一个这样的电路：<img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E5%9B%BE%E8%A7%A3%E6%B3%95%E7%94%B5%E8%B7%AF.png" srcset="/img/loading.gif" alt="1555649423470"></p>
+<p>静态工作点$i_{BQ}$首先满足电路拓扑结构，即电路方程$E_{C}=i_{BQ} R_{B}+u_{B E}$，其次满足三极管的输入特性曲线。二者交点即是静态工作点。同理可得输出的静态工作点。</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E8%BE%93%E5%85%A5%E7%89%B9%E6%80%A7%E6%9B%B2%E7%BA%BF%E5%9B%BE%E8%A7%A3%E6%B3%95.png" srcset="/img/loading.gif" alt="1555649665043"></p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E8%BE%93%E5%87%BA%E7%89%B9%E6%80%A7%E6%9B%B2%E7%BA%BF%E5%9B%BE%E8%A7%A3%E6%B3%95.png" srcset="/img/loading.gif" alt="1555649696484"></p>
+<p>由图可以看出：激励电压和两个电阻决定了静态工作点工作状态，设计时先获取输入输出特性曲线，便可设计出适合的放大电路。</p>
+<h1 id="两部件串联的图解方法"><a href="#两部件串联的图解方法" class="headerlink" title="两部件串联的图解方法"></a>两部件串联的图解方法</h1><h2 id="电阻串联二极管"><a href="#电阻串联二极管" class="headerlink" title="电阻串联二极管"></a>电阻串联二极管</h2><p>作为图解法的延申，看看这个电路如何用图解法解决<img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E4%B8%A4%E9%83%A8%E4%BB%B6%E5%9B%BE%E8%A7%A3%E6%B3%95%E7%94%B5%E8%B7%AF.png" srcset="/img/loading.gif" alt="1555650655893"></p>
+<p>首先要满足电阻的伏安特性曲线$I = \frac{1}{R}U$,其次要满足二极管的伏安特性曲线，更重要的是还要满足二者电压之和等于总电压，画在图上就是电阻的伏安特性曲线镜像旋转，并落在x轴等于总电压这个点上，这样就能保证二者电压之和一定。</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E4%B8%A4%E9%83%A8%E4%BB%B6%E4%B8%B2%E8%81%94%E5%9B%BE%E8%A7%A3%E6%B3%95.png" srcset="/img/loading.gif" alt="1555651188192"></p>
+<h2 id="两晶体管串联"><a href="#两晶体管串联" class="headerlink" title="两晶体管串联"></a>两晶体管串联</h2><p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E4%B8%A4%E6%99%B6%E4%BD%93%E7%AE%A1%E4%B8%B2%E8%81%94%E5%9B%BE%E8%A7%A3%E7%94%B5%E8%B7%AF.png" srcset="/img/loading.gif" alt="1555651280400"></p>
+<p>如果你对两个二极管分别进行计算，你将会得出两晶体管集电极电流并不相等的结论。这显然是错误的。<img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E6%99%B6%E4%BD%93%E7%AE%A1%E4%B8%B2%E8%81%94%E5%9B%BE%E8%A7%A3.png" srcset="/img/loading.gif" alt="1555651574627"></p>
+<p>按相同的方法画出输出特性曲线，两个电阻控制基极电流，从而控制图像的形状。总可以找到适合的电阻值，使得Vout在0-10V之间，也即控制交点的位置。显然，找到这个点比较困难，一次一次试总可以找到。</p>
+<h1 id="动态求解方法"><a href="#动态求解方法" class="headerlink" title="动态求解方法"></a>动态求解方法</h1><p>以上学习了三个知识点：</p>
+<ul>
+<li>晶体管的伏安特性</li>
+<li>晶体管的工作原理和静态的重要性，学会了计算静态工作点</li>
+<li>输入信号如何耦合到放大电路中</li>
+</ul>
+<p>下面我们学习，对于一个输入信号耦合到放大电路中，究竟放大了多少——动态求解方法。这是一种由输入变化量求取输出变化量的方法，区别于直接用公式带，相较来说更简单。其核心是：</p>
+<ul>
+<li>输入输出都取变化量</li>
+<li>电路中电压不变点接地，电流不变点断路：由叠加原理，不变的电压，电流不会产生变化量</li>
+<li>电路中某一元件的某一段伏安特性可以用直线代替，相当于动态电阻</li>
+</ul>
+<p>例：当$U_I$的变化量为$U_i$时，求输出$U_o$的表达式<img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E5%8A%A8%E6%80%81%E6%B1%82%E8%A7%A3%E7%A4%BA%E4%BE%8B%E7%94%B5%E8%B7%AF.png" srcset="/img/loading.gif" alt="1555927700385"></p>
+<p>当然可以用笨办法写出$U_I$作用的表达式和$U_I+U_i$的表达式，两个输出相减。但用但用动态电路求解方法就简单许多。</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E5%8A%A8%E6%80%81%E7%94%B5%E8%B7%AF%E7%A4%BA%E4%BE%8B%E7%AE%80%E5%8C%96%E7%94%B5%E8%B7%AF.png" srcset="/img/loading.gif" alt="1555927874977"></p>
+<p>由此可得：$u_{\mathrm{o}}=u_{\mathrm{i}} \times \frac{R_{1} / / R_{2}}{R_{1} / / R_{2}+R_{3}}$</p>
+<h1 id="双极型晶体管的动态模型——微变等效模型"><a href="#双极型晶体管的动态模型——微变等效模型" class="headerlink" title="双极型晶体管的动态模型——微变等效模型"></a>双极型晶体管的动态模型——微变等效模型</h1><p>理论上说，晶体管的高频等效模型包含低频模型，但低频模型更简单，所以拿来介绍。</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E5%BE%AE%E5%8F%98%E7%AD%89%E6%95%88%E6%A8%A1%E5%9E%8B%E7%94%B5%E8%B7%AF.png" srcset="/img/loading.gif" alt="1555929081145"></p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E5%BE%AE%E5%8F%98%E7%AD%89%E6%95%88%E6%A8%A1%E5%9E%8B%E8%A7%A3%E9%87%8A.png" srcset="/img/loading.gif" alt="1555929116026"></p>
+<p>对于上图电路，建立等效模型即弄清原理用基本元件进行描述，使得输出与原输出等价。</p>
+<ul>
+<li><p>首先，在静态工作点$Q_1$处$U_{BE}$存在静态值，由于输入信号的作用，有峰峰值$\Delta U_{BE}$的变化量，然后有$\Delta i_B$的变化量,这个变化可用$r_{be1}$来近似表示，由图中可以看出$Q_1$点的动态电阻，即为此处斜率的倒数，当然前提建立在输入信号幅值很小的基础上。由此，对伏安特性曲线上的任何一个静态点有：<img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C1556107036849.png" srcset="/img/loading.gif" alt="1556107036849"></p>
+<p> 经研究，在放大状态下的动态电阻可以近似表示为:$r_{\mathrm{be}}=r_{\mathrm{bb}}+\frac{U_{\mathrm{T}}}{I_{\mathrm{BQ} 1}}$,其中$r_{bb}$称之为体电阻，几欧到几百欧不等，一般取40欧；$U_T$常温下为26mv。此时相当于一个关系$\Delta i_{\mathrm{B}} \approx \frac{\Delta u_{\mathrm{BE}}}{r_{\mathrm{be}}}$</p>
+</li>
+<li><p>从$i_b$到$i_c$，可以用电流控制电流源来表示<img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E6%99%B6%E4%BD%93%E7%AE%A1%E7%AE%80%E5%8C%96%E7%AD%89%E6%95%88%E6%A8%A1%E5%9E%8B.png" srcset="/img/loading.gif" alt="1555930055047"></p>
+</li>
+</ul>
+<h1 id="双极型晶体管放大电路的动态分析"><a href="#双极型晶体管放大电路的动态分析" class="headerlink" title="双极型晶体管放大电路的动态分析"></a>双极型晶体管放大电路的动态分析</h1><h2 id="动态分析的三个重要指标"><a href="#动态分析的三个重要指标" class="headerlink" title="动态分析的三个重要指标"></a>动态分析的三个重要指标</h2><ul>
+<li>电压放大倍数：$A_{\mathrm{u}}=\frac{u_{\mathrm{o}}}{u_{\mathrm{i}}}$，$A_{\mathrm{u}}=20 \times \log \left(\frac{u_{\mathrm{o}}}{u_{\mathrm{i}}}\right)(\mathrm{dB})$<img src="%E7%94%B5%E8%B7%AF%E4%B8%8E%E7%94%B5%E5%AD%90%E5%AD%A6%5C%E7%94%B5%E5%8E%8B%E5%A2%9E%E7%9B%8A%E4%B8%8Edb%E7%9A%84%E5%85%B3%E7%B3%BB.png" srcset="/img/loading.gif" alt="1555931710706"></li>
+<li>输入电阻：输入电压变化量除以输入电流变化量，等效于从输入端看进去的输入电阻$r_{\mathrm{i}}=\frac{u_{\mathrm{i}}}{i_{\mathrm{i}}}$，我们希望输入电阻越大越好，因为可以让更多的电压到达下一级。</li>
+<li>输出电阻：同上，我们希望越小越好，因为可以让更多电压到负载上。</li>
+</ul>
+<h2 id="动态分析的步骤"><a href="#动态分析的步骤" class="headerlink" title="动态分析的步骤"></a>动态分析的步骤</h2><ul>
+<li><p>画出微变等效模型：</p>
+<ul>
+<li>电压不变点进行接地</li>
+<li>大电容短接，小电容开路</li>
+<li>晶体管用动态等效模型代替</li>
+<li>画成顺眼的电路图</li>
+</ul>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E5%8A%A8%E6%80%81%E7%AD%89%E6%95%88%E6%A8%A1%E5%9E%8B.png" srcset="/img/loading.gif" alt="1555932260744"></p>
+</li>
+<li><p>求解放大倍数，输入电阻，输出电阻</p>
+<ul>
+<li>在求解放大倍数时，把输入输出都表示成含$i_b$的表达式，消去即可。</li>
+<li>输入电阻靠眼睛看就行，过于复杂的可以假设$U_i$已知，计算电路中的电流即可</li>
+<li>电流控制电流源可以改为电压控制电压源<img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E7%94%B5%E5%8E%8B%E6%8E%A7%E5%88%B6%E7%94%B5%E5%8E%8B%E6%BA%90.png" srcset="/img/loading.gif" alt="1555932681557"></li>
+</ul>
+</li>
+</ul>
+<h1 id="动态指标的实验测量法"><a href="#动态指标的实验测量法" class="headerlink" title="动态指标的实验测量法"></a>动态指标的实验测量法</h1><p>获得三大动态指标：</p>
+<ul>
+<li>理论分析法——准确度不高</li>
+<li>实验测量法——可靠但操作困难</li>
+<li>仿真测量法——可信度高，操作简单：multisim，PSPICE,TINA-TI</li>
+</ul>
+<h2 id="放大倍数的实验测量法"><a href="#放大倍数的实验测量法" class="headerlink" title="放大倍数的实验测量法"></a>放大倍数的实验测量法</h2><ul>
+<li>放大电路供电，输入端接正弦信号，考虑到隔直电容的大小，一般选10kHz的信号频率（此频率下，10$\mu F$的电容容抗为1.59欧，可近似认为短路）。当放大倍数较大时，为了避免失真，一般选用正弦波幅度1-10mV的输入信号。</li>
+<li>示波器观察输出，以不失真为目标，输出信号频率应和输入信号频率一致。</li>
+<li>用晶体管毫伏表测量输入信号有效值,测量输出信号的有效值，二者就可得出放大倍数。粗略估计时，在示波器上直接读取也可。</li>
+</ul>
+<h2 id="输入电阻的实验测量法"><a href="#输入电阻的实验测量法" class="headerlink" title="输入电阻的实验测量法"></a>输入电阻的实验测量法</h2><p>一个电路的输入电阻是可能和负载有关的，因此，必要时应注明是否带负载，负载大小是多少。</p>
+<p>测量电路如下：</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E8%BE%93%E5%85%A5%E7%94%B5%E9%98%BB%E5%AE%9E%E9%AA%8C%E6%B5%8B%E9%87%8F%E5%8F%91%E5%8F%91.png" srcset="/img/loading.gif" alt="1555933957656"></p>
+<ul>
+<li><p>放大器供电，选择R与输入电阻相差不大，以保证测量的准确性。信号源选择与放大倍数测量一致。</p>
+</li>
+<li><p>示波器观察，保证其正常</p>
+</li>
+<li><p>用晶体管毫伏表测量$T_1$,$T_2$出电压的有效值，则有：$r_{i}=\frac{U_{\mathrm{T} 2-\mathrm{rms}}}{U_{\mathrm{T} 1_{-} \mathrm{rms}}-U_{\mathrm{T} 2_{-} \mathrm{rms}}} R$，这可以用输入电流在R，$r_1$上相等来列表达式。</p>
+</li>
+</ul>
+<h2 id="输出电阻的实验测量法"><a href="#输出电阻的实验测量法" class="headerlink" title="输出电阻的实验测量法"></a>输出电阻的实验测量法</h2><p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E8%BE%93%E5%87%BA%E7%94%B5%E9%98%BB%E7%9A%84%E5%AE%9E%E9%AA%8C%E6%B5%8B%E9%87%8F%E6%B3%95.png" srcset="/img/loading.gif" alt="1555934390728"></p>
+<ul>
+<li>放大器供电，接上信号源。</li>
+<li>开关S断开的情况下示波器观察，保证其正常。</li>
+<li>有：$r_{\mathrm{o}}=\frac{u_{\mathrm{o} \infty}-u_{\mathrm{oL}}}{u_{\mathrm{oL}}} \times R_{\mathrm{L}}$，为了获得更加准确地测量，$R_L$过大过小都不行，应先预估其值，这是准确的关键。一种改进的方法，用一个电位器代替负载电阻，不断调节，使$u_{\mathrm{oL}}=0.5 u_{0 \infty}$，拿下电位器，测电位器的阻值即可。</li>
+</ul>
+<h1 id="共基极，共集电极放大电路及PNP管电路"><a href="#共基极，共集电极放大电路及PNP管电路" class="headerlink" title="共基极，共集电极放大电路及PNP管电路"></a>共基极，共集电极放大电路及PNP管电路</h1><h2 id="区分"><a href="#区分" class="headerlink" title="区分"></a>区分</h2><p>从放大机理上来看，能够让$U_{BE}$变的就是输入端，所以输入一定是b，e两极，输出一定在c，e两级。这样b不输出，c不输入，就有三种电路</p>
+<ul>
+<li>共射极放大电路：b输入，c输出</li>
+<li>共集电极放大电路——射极跟随器：b输入，e输出</li>
+<li>共基极放大电路：e输入，c输出</li>
+</ul>
+<h2 id="共基极放大电路"><a href="#共基极放大电路" class="headerlink" title="共基极放大电路"></a>共基极放大电路</h2><p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E5%85%B1%E5%9F%BA%E6%9E%81%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF.png" srcset="/img/loading.gif" alt="1555935566271"></p>
+<p>为保证有足够的电压增益，一般在基极增加大电容$C_B$。</p>
+<p>动态等效电路和戴维南等效电路如下：</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E5%85%B1%E5%9F%BA%E6%9E%81%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E7%AD%89%E6%95%88%E7%94%B5%E8%B7%AF.png" srcset="/img/loading.gif" alt="1555935665028"></p>
+<p>若信号源内阻为0，列写节点电压方程有：$A_{\mathrm{ui}}=\frac{u_{o}}{u_{i}}=\frac{\beta R_{L}^{\prime}}{r_{\mathrm{be}}}$，用戴维南等效电路有相同的结论。</p>
+<p>这说明，共基极放大电路在不考虑信号源内阻的情况下，具有与共射极放大电路大小相同的电压增益R是极性力同相放大而共射极电路是反相放大 。 </p>
+<p>输入电阻：$r_{i}=R_{E} / / \eta_{\mathrm{be}} / / \frac{r_{\mathrm{be}}}{\beta}=R_{E} / / \frac{r_{\mathrm{be}}}{1+\beta}$，说明共基极放大电路输入电阻很小</p>
+<p>输出电阻和共射极放大电路相同</p>
+<h2 id="共集电极放大电路"><a href="#共集电极放大电路" class="headerlink" title="共集电极放大电路"></a>共集电极放大电路</h2><p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E5%85%B1%E9%9B%86%E7%94%B5%E6%9E%81%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF.png" srcset="/img/loading.gif" alt="1555936128422"></p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E5%85%B1%E9%9B%86%E7%94%B5%E6%9E%81%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E7%AD%89%E6%95%88%E7%94%B5%E8%B7%AF.png" srcset="/img/loading.gif" alt="1555936202306"></p>
+<ul>
+<li>$A_{\mathrm{ui}}=\frac{u_{\mathrm{o}}}{u_{\mathrm{i}}}=\frac{i_{b}(1+\beta) R_{L}^{\prime}}{i_{b}\left(r_{\mathrm{be}}+(1+\beta) R_{L}^{\prime}\right)}=\frac{(1+\beta) R_{L}^{\prime}}{r_{\mathrm{be}}+(1+\beta) R_{L}^{\prime}}$，其中，$R_{\mathrm{L}}^{\prime}=R_{\mathrm{E}} / / R_{\mathrm{L}}$，多数情况下：$(1+\beta) R_{L}^{\prime}&gt;&gt;r_{\mathrm{be}}$，则放大倍数接近为1，因此叫做射极跟随器。</li>
+<li>$r_{\mathrm{i}}=R_{B} / /\left(r_{\mathrm{be}}+(1+\beta) R_{L}^{\prime}\right)$，输入电阻远大于另外两个电路。</li>
+<li>$r_{o}=R_{E} / / \frac{r_{\mathrm{be}}+R_{S} / / R_{B}}{1+\beta}$，输出电阻很小，一般为几欧到几十欧。</li>
+<li>不具备放大能力，但具备电流放大能力和大的输入电阻，在扩流和阻抗匹配中有广泛应用</li>
+</ul>
+<p>需要<strong>特别指出</strong>的是，共射级共基极电路都有如下特点：输入电阻与负载无关，输出电阻与信号源内阻无关。但共集电极电路却不是如此。它的输入电阻与负载大小有关，而输出电阻与信号源内阻有关，在多级电路级联时，需要特别注意 。 </p>
+<h2 id="PNP管放大电路"><a href="#PNP管放大电路" class="headerlink" title="PNP管放大电路"></a>PNP管放大电路</h2><p>方法一：<img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5CPNP%E7%AE%A1.png" srcset="/img/loading.gif" alt="1555936838171"></p>
+<p>方法二：所有求解值都是反的，所有图都从第一象限到第三象限。</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5CPNP%E7%AE%A12.png" srcset="/img/loading.gif" alt="1555936873848"></p>
+<h1 id="大信号情况下的失真分析"><a href="#大信号情况下的失真分析" class="headerlink" title="大信号情况下的失真分析"></a>大信号情况下的失真分析</h1><p>当输入信号幅值过大，产生失真，称为大信号失真。其明显的原因是输入信号峰值使晶体管处于饱和区或截止区。第二个原因是由于晶体管输入特性曲线是指数级增长，大信号导致不能用一段直线来描述特性曲线，从而产生变形。</p>
+<h2 id="失真电压裕度"><a href="#失真电压裕度" class="headerlink" title="失真电压裕度"></a>失真电压裕度</h2><p>在一个晶体管放大电路中，输入为正弦波电压信号，输出所能达到的最大不失真正弦信号的幅度，陈伟失真电压裕度。</p>
+<p>当确定了静态工作点Q（$U_{CEQ}$,$I_{CQ}$）,则</p>
+<ul>
+<li>饱和失真电压裕度$U_{ops}$为：$U_{o p s}=U_{C E Q}-U_{C B S}$，其中$U_{CES}$是饱和管压降，小信号时一般取0.3V左右</li>
+<li>截止失真电压裕度$U_{O P C}$：$U_{O P C}=U_{C E_{-} \max }-U_{C B Q}$,$U_{C E_{-} \max }$是指输入信号加载的情况下，$u_{CE}$所能达到的最大电压。</li>
+</ul>
+<h2 id="静态负载线和动态负载线"><a href="#静态负载线和动态负载线" class="headerlink" title="静态负载线和动态负载线"></a>静态负载线和动态负载线</h2><p>对于这样一个电路：<img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E8%B4%9F%E8%BD%BD%E7%BA%BF%E7%94%B5%E8%B7%AF.png" srcset="/img/loading.gif" alt="1555998628836"></p>
+<p>给定$E_c$和$R_c$，改变$R_B$可以确定一个静态工作点Q（$U_{CEQ}$,$I_{CQ}$），全部静态工作点的集合形成一条直线称之为静态负载线，有：$E_{C}=U_{C E Q}+I_{C Q} \times R_{C}$。</p>
+<p>当确定静态工作点后，一旦加载输入信号，任一时刻晶体管摆脱Q点，形成新的（$U_{CE}$,$I_{C}$）组合，叫做动态工作点，用q表示。所有的q点形成一条直线，称之为动态负载线，有：$E_{C}=u_{C E}+i_{C} \times R_{C}$。</p>
+<p>在下图用绿色线标出，可知上述电路图的两条负载线时重合的。</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E5%8A%A8%E6%80%81%E8%B4%9F%E8%BD%BD%E7%BA%BF%E5%9B%BE.png" srcset="/img/loading.gif" alt="1555999031389"></p>
+<h2 id="不重合的静动态负载线"><a href="#不重合的静动态负载线" class="headerlink" title="不重合的静动态负载线"></a>不重合的静动态负载线</h2><p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E4%B8%8D%E9%87%8D%E5%90%88%E7%9A%84%E9%9D%99%E5%8A%A8%E6%80%81%E8%B4%9F%E8%BD%BD%E7%BA%BF.png" srcset="/img/loading.gif" alt="1555999275250"></p>
+<p>对于较高频率的输入信号，$C_2$相当于短路，所以$i_c$会分配给$R_c$和$R_L$，在上一电路中有$\Delta u_{C}=-\Delta i_{C} \times R_{C}$</p>
+<p>，而在此电路中有$\Delta u_{C}=-\Delta i_{C} \times\left(R_{C} / / R_{L}\right)$。</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E9%9D%99%E5%8A%A8%E6%80%81%E4%B8%8D%E5%90%8C%E7%9A%84%E8%B4%9F%E8%BD%BD%E7%BA%BF.png" srcset="/img/loading.gif" alt="1556021727746"></p>
+<p>这样就导致了失真电压裕度变得更小。</p>
+<h1 id="放大电路的综合分析"><a href="#放大电路的综合分析" class="headerlink" title="放大电路的综合分析"></a>放大电路的综合分析</h1><h2 id="四个电阻提供静态工作点的好处"><a href="#四个电阻提供静态工作点的好处" class="headerlink" title="四个电阻提供静态工作点的好处"></a>四个电阻提供静态工作点的好处</h2><p>下图是共射极放大电路，其中$\beta=100, r_{\mathrm{bb‘}}=132 \Omega$</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E5%9B%9B%E4%B8%AA%E7%94%B5%E9%98%BB%E7%9A%84%E5%A5%BD%E5%A4%84.png" srcset="/img/loading.gif" alt="1556021928330"></p>
+<p>我们写出静态求解过程：</p>
+<ul>
+<li>$k=\frac{R_{B 2}}{R_{B 1}+R_{B 2}}$</li>
+<li>$R_{B}=\frac{R_{B 1} \times R_{B 2}}{R_{B 1}+R_{B 2}}$</li>
+<li>$I_{\mathrm{BQ}}=\frac{k E_{C}-U_{\mathrm{BEQ}}}{R_{B}+(1+\beta) R_{E}}$</li>
+<li>$U_{\mathrm{CEQ}}=E_{C}-R_{C} \times \beta \frac{k E_{C}-U_{\mathrm{BEQ}}}{R_{B}+(1+\beta) R_{E}}-R_{E} \times(1+\beta) \frac{k E_{C}-U_{\mathrm{BEQ}}}{R_{B}+(1+\beta) R_{E}}$</li>
+<li>当$(1+\beta) R_{E}&gt;&gt;R_{B}$，有$U_{\mathrm{CEQ}} \approx E_{C}-\left(k E_{C}-U_{\mathrm{BEQ}}\right)\left(1+\frac{R_{C}}{R_{E}}\right)$</li>
+</ul>
+<p>看见没有，$I_{CQ}$和$U_{\mathrm{CEQ}}$与$\beta$几乎无关，这样带来几个好处。</p>
+<ul>
+<li><p>不怕温度漂移，因为$\beta$会随着温度变化</p>
+</li>
+<li><p>不怕晶体管的分散性，这是晶体管BC817-16的数据手册中的截图，其中$h_{FE}$就是$\beta$,厂家只能保证该值的一个范围。</p>
+<p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E6%99%B6%E4%BD%93%E7%AE%A1%E7%9A%84%E5%88%86%E6%95%A3%E6%80%A7.png" srcset="/img/loading.gif" alt="1556022700170"></p>
+</li>
+</ul>
+<p>如果不这样设计电路，而纠结于多了两个电阻的成本，显然得不偿失。</p>
+<h2 id="三电阻静态电路"><a href="#三电阻静态电路" class="headerlink" title="三电阻静态电路"></a>三电阻静态电路</h2><p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E4%B8%89%E7%94%B5%E9%98%BB%E9%9D%99%E6%80%81%E7%94%B5%E8%B7%AF.png" srcset="/img/loading.gif" alt="1556022963719"></p>
+<p>静态求解：</p>
+<ul>
+<li>$I_{\mathrm{BQ}}=\frac{E_{C}-U_{\mathrm{BEQ}}}{R_{B}+(1+\beta) R_{E}}$</li>
+<li>$U_{\mathrm{CEQ}}=E_{C}-R_{C} \times \beta \frac{E_{C}-U_{\mathrm{BEQ}}}{R_{B}+(1+\beta) R_{E}}-R_{E} \times(1+\beta) \frac{E_{C}-U_{\mathrm{BEQ}}}{R_{B}+(1+\beta) R_{E}}$</li>
+<li>当$(1+\beta) R_{E}&gt;&gt;R_{B}$，有$U_{\mathrm{CEQ}} \approx E_{C}-\left(E_{C}-U_{\mathrm{BEQ}}\right)\left(1+\frac{R_{C}}{R_{E}}\right)$</li>
+</ul>
+<p>这样依然与$ \beta$ 无关,但要满足$(1+\beta) R_{E}&gt;&gt;R_{B}$，则要$U_{\mathrm{EQ}}=R_{E} \times(1+\beta) \frac{E_{C}-U_{\mathrm{BEQ}}}{R_{B}+(1+\beta) R_{E}} \approx E_{C}-U_{\mathrm{BEQ}}$，即发射极静态电位接近电源电压，晶体管的工作区间就很小，所以这也不好。</p>
+<h2 id="单管放大电路的静态工作点选择"><a href="#单管放大电路的静态工作点选择" class="headerlink" title="单管放大电路的静态工作点选择"></a>单管放大电路的静态工作点选择</h2><ul>
+<li>对$U_{CEQ}$来说，应该选择动态负载线的中心位置。两级的晶体管还要考虑驱动问题。</li>
+<li>对于$I_{CQ}$来说，由于要选择低功耗设计，则应该尽量小。但势必要选择大电阻，引入更多噪声，也导致输入电阻的增大。因此，抗干扰和低功耗是矛盾的关系。</li>
+</ul>
+<h2 id="静态动态分离，增益改变"><a href="#静态动态分离，增益改变" class="headerlink" title="静态动态分离，增益改变"></a>静态动态分离，增益改变</h2><p>有表达式可知，静态动态都走同一样的电路，这就导致二者相互影响，采用差动放大电路可以实现动态和静态分离。另一种方法是利用电容器将而这分离，而上图的$R_{CE}$便起到了短路$R_{E1}$的作用。</p>
+<h1 id="多级放大电路"><a href="#多级放大电路" class="headerlink" title="多级放大电路"></a>多级放大电路</h1><p>目的：增大放大倍数，增加输入电阻，减小输出电阻，扩展频率带，增大输出功率等</p>
+<h2 id="耦合方式"><a href="#耦合方式" class="headerlink" title="耦合方式"></a>耦合方式</h2><ul>
+<li>直接耦合：用导线m电阻，二极管（不用，电容，变压器，光敏管）连接两级电路。优点是：可以放大直流和低频信号。缺点是：静态动态工作点都不稳定且相互影响，计算比较麻烦。</li>
+<li>阻容耦合：优点：两级电路相互独立，并且静态工作点独立稳定。缺点：不能放大直流信号，对低频具有强大的衰减作用。</li>
+<li>变压器耦合:与阻容耦合类似，多用于高频电路。</li>
+<li>光电耦合:将前级输出加载到光电管上，之后传递给后级电路。多用于数字电路，模拟电路用的较少。</li>
+</ul>
+<h2 id="不同组态放大电路的组合方式"><a href="#不同组态放大电路的组合方式" class="headerlink" title="不同组态放大电路的组合方式"></a>不同组态放大电路的组合方式</h2><p>共集电极电路：多用于输入输出级（输入电阻大，输出电阻小）</p>
+<p>共射极，共基极电路：多用于中间级（有较大的电压增益）</p>
+<h2 id="阻容耦合放大电路求解"><a href="#阻容耦合放大电路求解" class="headerlink" title="阻容耦合放大电路求解"></a>阻容耦合放大电路求解</h2><p><img src="%E5%8F%8C%E6%9E%81%E5%9E%8B%E6%99%B6%E4%BD%93%E7%AE%A1%5C%E9%98%BB%E5%AE%B9%E8%80%A6%E5%90%88%E6%B1%82%E8%A7%A3.png" srcset="/img/loading.gif" alt="1556024653620"></p>
+<p>将电路改为上图所示，每一级的静态相互独立，依次计算即可。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%94%B5%E8%B7%AF%E4%B8%8E%E7%94%B5%E5%AD%90%E5%AD%A6/">电路与电子学</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%96%B0%E6%A6%82%E5%BF%B5%E6%A8%A1%E6%8B%9F%E7%94%B5%E8%B7%AF/">新概念模拟电路</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/05/09/%E7%90%86%E6%83%B3%E5%85%89%E5%AD%A6%E7%B3%BB%E7%BB%9F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">理想光学系统</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/04/09/%E4%BA%8C%E5%88%86%E7%B1%BB%E5%99%A8%E5%8F%8A%E5%85%B6%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87/">
+                        <span class="hidden-mobile">二分类及其性能指标</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

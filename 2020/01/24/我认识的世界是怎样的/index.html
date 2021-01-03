@@ -1,25 +1,490 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
 
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
-{% block page_class %}page-post-detail{% endblock %}
 
 
-{% block content %}
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>我认识的世界是怎样的 - Hexo</title>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>windilycloud</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
+</nav>
 
-{% endblock %}
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="我认识的世界是怎样的">
+              
+            </span>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-01-24 00:00" pubdate>
+        2020年1月24日 凌晨
+      </time>
+    </span>
+  
+</div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      31
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">我认识的世界是怎样的</h1>
+            
+            <div class="markdown-body">
+              <h1 id="我认识的世界是怎样的"><a href="#我认识的世界是怎样的" class="headerlink" title="我认识的世界是怎样的"></a>我认识的世界是怎样的</h1><blockquote>
+<p>“One’s real value first lies in to what degree and what sense he set himself<br>lies in to lies.”<br>“一个人的真正价值，首先决定于他在什么程度上和在什么意义上从自我解放出来。”<br>——爱因斯坦</p>
+</blockquote>
+<p>经过数天对哲学史的粗略学习，虽只触及这些划时代人物思想的皮毛，但也受益匪浅。这些东西并没有跳出我的认知，可我有一种前所未有的明白了我周围的事物的感觉。</p>
+<p>我先粗略叙述一下我认为的西方对世界的认识过程：人类最初利用神话解释一切，随着物质条件的逐渐丰厚，开始思考世界本身，试图剥离神来认识世界。为了建立对世界的认知体系，发展了两个分支。一个是亚里士多德利用数学和逻辑学构建世界的关系，一个是柏拉图的理性加感性构造的世界。从罗马帝国逐渐基督化，宗教理性化变成信仰，信仰转化为知识，基督教基于柏拉图主义构建基督哲学，人们接受了这样的客观唯心主义，并发展了基于宗教的经院哲学。历史的车轮滚滚向前，大量思想者区分了神学真理和哲学真理，启蒙运动文艺复兴促成了经院哲学快速衰落。人们开始从认知论研究，发展了理性主义与经验主义。人们基于理性主义和经验主义又发展对世界本质的思考，唯心主义与唯物主义迅猛发展。而到了当代甚至以后，都不会有严格的唯心唯物的区分，人们对形而上学的问题不置一词也没法定论，科学的发扬让我们确立了更好的方法认识世界，改造世界，创造世界。</p>
+<p>基于这些认识，我把认识的世界划分为三个范畴，形而上学，科学，哲学。</p>
+<h1 id="形而上学"><a href="#形而上学" class="headerlink" title="形而上学"></a>形而上学</h1><p>形而上学有很多解释，我这里指研究存在和事物本质的问题。《易经》的解释为：“形而上者谓之道，形而下者谓之器”。比如：</p>
+<ul>
+<li>宇宙最基本的组成是什么？</li>
+<li>意识和物质是怎么样的关系？</li>
+<li>到底有没有上帝，有没有神？</li>
+</ul>
+<p>这样的问题对我而言意义不大，它只存在于信念之中，不能被理性完全可靠的证明。或者说只能随着科学的发展，人们对世界的描述越来越深入，总有一天能企及理想的彼岸，但目前人类的认知水平是绝不能窥探到宇宙的终极奥义。</p>
+<p>在这方面我认为的有几位里程碑式的人物，古希腊的柏拉图，近代的培根和笛卡尔，之后古典哲学时期的康德，现代哲学的罗素，胡塞尔。总的来说我认为我们没必要找到宇宙的规律，我们要建立的只是我们认识世界的规律。我们认识是什么，它就是什么，直到通过经验证明它是错的而建立新的规律。这样的研究思考才有意义，不然形而上学的问题入无源之水。因此，在科学未发展至一定程度时，讨论形而上学问题无异于以卵击石，没有什么意义。</p>
+<p>退而求其次，我作为一个普通人，能认识世界现有的东西都极其困难，甚至穷其一生也没法理解现代文明的方方面面，又怎敢遑论这样的问题呢？唯一能做的就是放弃这种问题。</p>
+<h1 id="科学"><a href="#科学" class="headerlink" title="科学"></a>科学</h1><p>根据维基百科，科学是一种系统性的知识体系，它积累和组织并可检验有关于宇宙的解释和预测。强调预测结果的具体性和可证伪性。可证伪性理解为：科学只谈论可实证的概念，一切不可实证的东西都毫无意义。科学与之前的理论的根本区别是没有先验条件，只要有一例反例即可推翻。通过提出问题——作出假设——实验观测——得出结论来解释观测。也就是说科学本身你也不能证明它是对的，但它符合实验观察，具有普遍性和广泛性。同时它是在不断发展的，以求建立普遍和广泛的理论，科学最伟大的精神便是自我批判。</p>
+<p>科学利用的工具叫科学方法，任何研究方法要被视为科学方法，则必须是客观的（科学家们不能对于科学方法下产生的单一结果有不同的解释且研究时不能故意去改变结果的发生）。另一项基本期待，则是必须有完整的资料文件以供佐证，以及研究方法必须由第三者小心检视，并且确认该方法能重制。而研究这样方法的我认为是数学思想和逻辑学。</p>
+<p>科学分为三大分支:<strong>形式科学</strong>（如逻辑、数学、理论计算机科学），研究抽象概念；<strong>自然科学</strong>（如生物学、化学、物理学、地理学），在最宽泛的意义上研究自然；以及<strong>社会科学</strong>（如经济学、心理学、社会学），研究个体与社会。不过，对于形式科学能否确实算作一类科学存在不同意见，因为其并不依赖经验证据。而运用既有科学知识以达成实用目的的学科，如工程学和医学，则被归为<strong>应用科学</strong>.具体的研究子领域可参见维基百科的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-hans/%E5%AD%A6%E6%9C%AF%E9%A2%86%E5%9F%9F%E5%A4%A7%E7%BA%B2">学术领域大纲</a>。</p>
+<p>科学是我们认识事物的方法，通过对观察到的事物进行归纳验证得到规律。通过规律推导定律进而发现更多规律。在现代文明的建设之中，可以基本确信的是科学这个发展方向是历史主流，大势所趋。在已知认识论中最好的方法就是科学，因此从科学的角度出发，可以无视宗教，泛神论这些不具有可证伪性的东西。 </p>
+<h2 id="科学与宗教"><a href="#科学与宗教" class="headerlink" title="科学与宗教"></a>科学与宗教</h2><p>科学强调的是具体性和可证伪性，而宗教信奉叫”大道至简“。我听过一个这样的对话：佛教早就预言了宇宙包含星系，星系包含星球，星球包含生物，根据佛教中：“一千个小千世界，叫做“中千世界”；一千个中千世界，叫做“大千世界”。一个大千世界，因为它里面有小千、中千、大千，我们称其作“三千大千世界”。”。他对世界的解释不具体，预言的事实和事实有出入时，会以各种各样的方式自圆其说。但宗教的存在是否没有意义呢？显然不是，先不说人类的信仰问题，就这模棱两可的语言兴许可以挖掘出一些灵感。宗教的存在类似于理性与感性，一味掉入以科学解释任何东西而忽略人的主观感受有点冷冰冰的感觉。对于人类这种虚无的精神需求在树立科学的认识观之后可以用宗教建立信仰，不过现当代人我认为最好建立自我信仰，美术，音乐，运动这些艺术类的东西完全能满足精神世界的表达和需求。</p>
+<h1 id="哲学（价值理论）"><a href="#哲学（价值理论）" class="headerlink" title="哲学（价值理论）"></a>哲学（价值理论）</h1><p>对于哲学来说，科学的光芒掩盖了它，甚至由于量子理论的发展，科学已经大大超越了哲学。但科学研究的是可实证的问题，大量的无法实证的命题不但存在，而且有非常重要的意义。如美学，伦理，道德，信仰等，难道我们就放弃这些了吗？在科学之外的领域我认为是价值理论，我理解的哲学就是研究这一范畴的，这和其他地方也许会有很大的出入。哲学对我来说是一种心理活动（activity），这种想法来自爱丁堡大学的<a target="_blank" rel="noopener" href="https://www.coursera.org/learn/zhexue-daolun/">《哲学导论》</a>，他是这么叙述哲学的。</p>
+<blockquote>
+<p>philosophy is the activity of working out the right way of thinking about things.<br>哲学是想出正确思考事物的一种活动。</p>
+</blockquote>
+<p>这个定义妙就妙在它把哲学定义为一种活动，这非常适合我所叙述的美学，道德这些领域。这些东西受到个人的家庭背景，受教育程度，喜好等影响，不容易形成普遍广泛的理论，不能单单用科学来解释。而生活中很多问题也出在这里，比如：如何谈恋爱？如何成为一个高情商的人？我和婆婆的关系如何处理?有的人就会有疑问——那社会科学解决的问题不也是存在巨大的个体差异吗？个体差异固然存在，但个体之间整合成集体会有一个整体趋势，也就是”大势“，因此社会科学研究的基本单位不是个体，而是一个整体。不然无法证伪也称不上科学。</p>
+<p>个人的价值理论这样的问题我提倡多实践或者多进行哲学这样的活动，这类似于游泳，驾驶等技能，需要经验学习。有的人天赋异禀很快上手自然很少提这些问题，而有的人可能资质平平便需要花很多时间学习。你大可学习有经验的人提供经验，但每个人的资质不同具有很多不确定因素。我的建议是不要花大量时间在寻找经验上，而是主动获取经验。不会谈恋爱就疯狂谈恋爱，从中吸取经验不断总结改进。这些问题大可不用求教他人，这实在没办法形成知识体系，不然早就有体系了。</p>
+<p>我当初最爱问的问题还有:我如何找到人生的意义，这也是价值理论。存在主义列举了数十种人生意义：</p>
+<ol>
+<li><p>利他主义：你上有八十岁老母，下有嗷嗷待哺的孩子</p>
+</li>
+<li><p>给予和付出：对别人有益，让世界更美好。</p>
+</li>
+<li><p>为理想奉献：顾名思义</p>
+</li>
+<li><p>创造：发明创造，享受创造的乐趣</p>
+</li>
+<li><p>享乐主义：生来就是为了享乐，看遍大千世界</p>
+</li>
+<li><p>自我实现：儿时梦想是当科学家</p>
+</li>
+<li><p>自我超越：当了科学家之后</p>
+</li>
+</ol>
+<p>你说他错了吧，也没有，但是当时读完就认为人生也就那样吧。对于这个问题其根本就是满足感，没有理论告诉你这样在某种程度上是一定正确的，价值理论这种因人而异的问题除了自己实践，自己体验，别无他法。这也造就了每个人都有独立的人格，也是世界多样性与不可测性的具体体现。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>至此，我把我对世界的认识记录了下来，他没有打破我原先的认知体系，但我更加明了了。每当我看到一个问题，或者要不要与人争论，我要思索的是归类，对于科学问题可以争论，但对于价值判断问题永远不会有结果，顶多能互相交流，吸取经验，至于其它问题就更没意义了。我接下来的目标也比较明确了，要认识世界，一个是继承科学，在深度方面，科学最重要的工具是逻辑学和数学思想，我会继续学习。在广度方面，有百科全书《牛津通识读本》，这是人类的财富结晶，也许是目前我知道的最好的学习渠道。另一个是学习自我的“价值理论”，这需要我努力大胆的尝试各种东西，体会我认为是正确的，最美的，最满足的活动，从而形成自己的价值体系。</p>
+<p>最后，要说我信什么体系，那我当然信的是有中国特色的社会主义理论体系啊！</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E4%B8%96%E7%95%8C%E8%A7%82/">世界观</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/">世界观</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/02/28/%E6%88%91%E7%9A%84Hexo/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">我的Hexo</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/12/30/%E9%A6%99%E6%B8%AF%E4%B9%B1%E5%B1%80%E7%9A%84%E8%B5%B7%E6%BA%90,%E6%BC%94%E5%8F%98%E5%8F%8A%E8%B6%8B%E5%8A%BF/">
+                        <span class="hidden-mobile">香港乱局的起源,演变及趋势</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

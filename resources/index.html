@@ -1,83 +1,382 @@
-{% extends '_layout.swig' %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
 
-  {% block title %}{#
-  #}{% set page_title_suffix = ' | ' + title %}{#
 
-  #}{% if page.type === "categories" and not page.title %}{#
-    #}{{ __('title.category') + page_title_suffix }}{#
-  #}{% elif page.type === "tags" and not page.title %}{#
-    #}{{ __('title.tag') + page_title_suffix }}{#
-  #}{% else %}{#
-    #}{{ page.title + page_title_suffix }}{#
-  #}{% endif %}{#
-#}{% endblock %}
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {##################}
-    {### PAGE BLOCK ###}
-    {##################}
-    <div class="post-block page">
-      {% include '_partials/page-header.swig' %}
-      {#################}
-      {### PAGE BODY ###}
-      {#################}
-      <div class="post-body{% if theme.han %} han-init-context{% endif %}{% if page.direction && page.direction.toLowerCase() === 'rtl' %} rtl{% endif %}">
-        {# tagcloud page support #}
-        {% if page.type === "tags" %}
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                {% set visibleTags = 0 %}
-                {% for tag in site.tags %}
-                  {% if tag.length %}
-                    {% set visibleTags += 1 %}
-                  {% endif %}
-                {% endfor %}
-                {{ _p('counter.tag_cloud', visibleTags) }}
-            </div>
-            <div class="tag-cloud-tags">
-              {{ tagcloud({min_font: 12, max_font: 30, amount: 300, color: true, start_color: '#ccc', end_color: '#111'}) }}
-            </div>
-          </div>
-        {% elif page.type === 'categories' %}
-          <div class="category-all-page">
-            <div class="category-all-title">
-                {% set visibleCategories = 0 %}
-                {% for cat in site.categories %}
-                  {% if cat.length %}
-                    {% set visibleCategories += 1 %}
-                  {% endif %}
-                {% endfor %}
-                {{ _p('counter.categories', visibleCategories) }}
-            </div>
-            <div class="category-all">
-              {{ list_categories() }}
-            </div>
-          </div>
-        {% else %}
-          {{ page.content }}
-        {% endif %}
-      </div>
-      {#####################}
-      {### END PAGE BODY ###}
-      {#####################}
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>资源搜集 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>windilycloud</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-    {% include '_partials/breadcrumb.swig' %}
-    {######################}
-    {### END PAGE BLOCK ###}
-    {######################}
   </div>
+</nav>
 
-{% endblock %}
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="资源搜集">
+              
+            </span>
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+            
+          </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="page-content">
+  <h1 id="政府官方网站"><a href="#政府官方网站" class="headerlink" title="政府官方网站"></a>政府官方网站</h1><a class="btn" href="/assets"  target="_blank">中国行政体系思维导图</a>      <a class="btn" href="/2020/03/02/政府官方网站/"  target="_blank">网站链接汇总</a>
+
+<a class="btn" href="https://www.chsi.com.cn/"  target="_blank">学信网</a><a class="btn" href="http://jwb.njtech.edu.cn/"  target="_blank">教务处</a><a class="btn" href="https://mail.njtech.edu.cn/coremail/"  target="_blank">学校邮件系统</a>
+
+<h1 id="搜索引擎"><a href="#搜索引擎" class="headerlink" title="搜索引擎"></a>搜索引擎</h1><a class="btn" href="https://www.bing.com/"  target="_blank">必应</a><a class="btn" href="https://www.google.com"  target="_blank">谷歌</a><a class="btn" href="https://magi.com"  target="_blank">联想搜索</a><a class="btn" href="https://peekier.com"  target="_blank">匿名搜索</a>
+
+<h1 id="电子书"><a href="#电子书" class="headerlink" title="电子书"></a>电子书</h1><a class="btn" href="https://www.jiumodiary.com/"  target="_blank">鸠摩搜书</a><a class="btn" href="https://b-ok.cc/"  target="_blank">ZLibrar</a><a class="btn" href="https://kindle.51nazhun.pub/"  target="_blank">kindle电子书分享</a><a class="btn" href="https://en.booksee.org/"  target="_blank">Booksee</a><a class="btn" href="https://www.ituring.com.cn/"  target="_blank">图灵社区</a><a class="btn" href="https://www.pdfdrive.com/"  target="_blank">pdfdrive英文小说</a><a class="btn" href="https://manybooks.net/"  target="_blank">manybooks英文小说</a><a class="btn" href="https://www.tianfateng.cn/"  target="_blank">田间小站</a><a class="btn" href="https://new.shuge.org/"  target="_blank">书格</a><a class="btn" href="https://www.duyixing.com/"  target="_blank">中文杂志</a><a class="btn" href="http://www.book118.com/index.html/"  target="_blank">考试文档</a><a class="btn" href="https://cnx.org/"  target="_blank">国外教科书</a><a class="btn" href="http://freecomputerbooks.com/"  target="_blank">国外计算机书籍</a><a class="btn" href="https://github.com/nailperry-zd/The-Economist"  target="_blank">经济学人下载</a>
+
+
+<h1 id="工具箱"><a href="#工具箱" class="headerlink" title="工具箱"></a>工具箱</h1><h2 id="工具合集"><a href="#工具合集" class="headerlink" title="工具合集"></a>工具合集</h2><a class="btn" href="http://www.toplinks.cc/"  target="_blank">万千合集站</a><a class="btn" href="https://site.sciping.com/"  target="_blank">高质量的学术导航</a><a class="btn" href="https://zh.wikihow.com/"  target="_blank">WikiHow</a><a class="btn" href="https://tool.lu/"  target="_blank">程序员的工具箱</a><a class="btn" href="https://tools.miku.ac/"  target="_blank">工具较少</a>
+
+<h2 id="常用工具"><a href="#常用工具" class="headerlink" title="常用工具"></a>常用工具</h2><a class="btn" href="https://translate.google.cn/"  target="_blank">谷歌翻译</a><a class="btn" href="https://www.materialtools.com/?page=1"  target="_blank">云短信</a><a class="btn" href="https://mubu.com/list"  target="_blank">幕布</a><a class="btn" href="https://coggle.it/"  target="_blank">coggle</a><a class="btn" href="https://www.processon.com/diagrams"  target="_blank">processon</a><a class="btn" href="https://quqi.com/959137/0"  target="_blank">曲奇云盘</a><a class="btn" href="https://convertio.co/zh/azw3-pdf/"  target="_blank">格式转换</a><a class="btn" href="https://www.remove.bg/zh/"  target="_blank">在线精细抠图</a>
+
+<h2 id="论坛社区"><a href="#论坛社区" class="headerlink" title="论坛社区"></a>论坛社区</h2><a class="btn" href="https://live.bilibili.com/p/eden/area-tags?parentAreaId=1&areaId=33&visit_id=19nolhf1n57k"  target="_blank">Bilibili下饭</a><a class="btn" href="https://github.com/"  target="_blank">Github</a><a class="btn" href="https://www.kesci.com/"  target="_blank">和鲸社区</a><a class="btn" href="https://www.zhihu.com/"  target="_blank">知乎</a><a class="btn" href="http://www.ruanyifeng.com/blog/"  target="_blank">阮一峰的网络日志</a><a class="btn" href="http://muchong.com/bbs/"  target="_blank">小木虫bbs</a>
+
+<h2 id="课程搜索"><a href="#课程搜索" class="headerlink" title="课程搜索"></a>课程搜索</h2><a class="btn" href="https://ocw.mit.edu/index.htm"  target="_blank">MIT开放课程</a><a class="btn" href="https://www.edx.org/"  target="_blank">edx</a><a class="btn" href="https://www.coursera.org/"  target="_blank">Coursera</a><a class="btn" href="https://next.xuetangx.com/"  target="_blank">学堂在线</a><a class="btn" href="https://open.163.com/"  target="_blank">网易公开课</a><a class="btn" href="https://www.icourse163.org/"  target="_blank">中国大学MOOC</a><a class="btn" href="https://study.163.com/"  target="_blank">网易云课堂</a><a class="btn" href="http://www.icourses.cn/home/"  target="_blank">爱课程</a>
+
+<h2 id="学术搜索"><a href="#学术搜索" class="headerlink" title="学术搜索"></a>学术搜索</h2><a class="btn" href="https://site.sciping.com/"  target="_blank">科塔学术</a><a class="btn" href="https://sci-hub.tw/"  target="_blank">SciHub</a><a class="btn" href="https://www.cn-ki.net/"  target="_blank">iData可替代知网</a><a class="btn" href="http://scholar.cnki.net/"  target="_blank">CNKI</a><a class="btn" href="http://xueshu.baidu.com/"  target="_blank">百度学术</a><a class="btn" href="https://ac.scmor.com/"  target="_blank">谷歌学术镜像</a><a class="btn" href="http://www.innojoy.com/search/index.html"  target="_blank">innojoy专利搜索</a><a class="btn" href="http://www.zbgb.org/"  target="_blank">国家标准下载</a><a class="btn" href="http://openstd.samr.gov.cn/"  target="_blank">国家标准全文公开系统</a><a class="btn" href="http://data.stats.gov.cn/"  target="_blank">国家数据</a><a class="btn" href="https://w.upupming.site/wiki/Wikipedia:首页"  target="_blank">中文维基百科</a><a class="btn" href="https://en.jinzhao.wiki/wiki/Main_Page"  target="_blank">英文维基百科</a><a class="btn" href="http://www.chaoxing.com/"  target="_blank">超星发现</a><a class="btn" href="https://www.wdl.org/zh/"  target="_blank">世界数字图书馆</a><a class="btn" href="https://www.nature.com/"  target="_blank">Nature</a><a class="btn" href="https://science.sciencemag.org/"  target="_blank">Science</a><a class="btn" href="http://plagiarisma.net/cn/"  target="_blank">免费论文查重</a><a class="btn" href="https://www.duplichecker.com/"  target="_blank">免费查重二</a><a class="btn" href="https://www.copyscape.com/"  target="_blank">免费查重三</a>
+
+<h2 id="免费图片字体音乐模板"><a href="#免费图片字体音乐模板" class="headerlink" title="免费图片字体音乐模板"></a>免费图片字体音乐模板</h2><a class="btn" href="https://www.pexels.com/"  target="_blank">pexels图片</a><a class="btn" href="https://unsplash.com/"  target="_blank">Unsplash图片</a>
+
+<a class="btn" href="https://www.hellofont.cn/"  target="_blank">字由</a>
+
+<a class="btn" href="https://www.yuque.com/ruanyf/weekly/free-music"  target="_blank">免费可商用音乐</a>
+
+<a class="btn" href="http://www.officeplus.cn/Template/Home.shtml"  target="_blank">office官方模板</a><a class="btn" href="http://www.ypppt.com/"  target="_blank">优品ppt</a>
+
+<h2 id="神奇网站"><a href="#神奇网站" class="headerlink" title="神奇网站"></a>神奇网站</h2><a class="btn" href="https://www.msdmanuals.com/zh/"  target="_blank">默沙东诊疗手册</a><a class="btn" href="https://www.tunefind.com/movies"  target="_blank">英文影视剧游戏BGM汇总</a><a class="btn" href="https://getitfree.cn/"  target="_blank">正版中国</a><a class="btn" href="https://www.autopiano.cn/"  target="_blank">自由钢琴</a>
+
+<h1 id="编程"><a href="#编程" class="headerlink" title="编程"></a>编程</h1><h2 id="文档API"><a href="#文档API" class="headerlink" title="文档API"></a>文档API</h2><h3 id="编程语言"><a href="#编程语言" class="headerlink" title="编程语言"></a>编程语言</h3><a class="btn" href="https://devdocs.io/help"  target="_blank">API搜索合集</a><a class="btn" href="https://docs.python.org/zh-cn/3/"  target="_blank">python文档</a><a class="btn" href="https://wangchujiang.com/linux-command/"  target="_blank">Linux命令搜索</a><a class="btn" href="https://leetcode-cn.com/"  target="_blank">力扣</a><a class="btn" href="https://www.kaggle.com/"  target="_blank">kaggle</a><a class="btn" href="https://regex101.com/"  target="_blank">正则表达式</a>
+
+<h3 id="web"><a href="#web" class="headerlink" title="web"></a>web</h3><a class="btn" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML"  target="_blank">HTML</a><a class="btn" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript"  target="_blank">JavaScript</a><a class="btn" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS"  target="_blank">CSS</a><a class="btn" href="https://www.runoob.com/"  target="_blank">菜鸟教程</a><a class="btn" href="https://www.w3cschool.cn/"  target="_blank">W3Cschool</a>
+
+<h3 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h3><a class="btn" href="https://pandas.pydata.org/pandas-docs/stable/index.html"  target="_blank">Pandas</a><a class="btn" href="https://numpy.org/devdocs/"  target="_blank">Numpy</a><a class="btn" href="https://seaborn.pydata.org/"  target="_blank">Seaborn</a><a class="btn" href="https://matplotlib.org/"  target="_blank">Matplotlib</a><a class="btn" href="https://docs.sympy.org/latest/index.html"  target="_blank">Sympy</a>
+
+<h3 id="爬虫"><a href="#爬虫" class="headerlink" title="爬虫"></a>爬虫</h3><a class="btn" href="http://cn.python-requests.org/zh_CN/latest/"  target="_blank">Requests</a><a class="btn" href="https://beautifulsoup.readthedocs.io/zh_CN/latest/"  target="_blank">BeautifulSoup</a><a class="btn" href="https://www.selenium.dev/documentation/en/"  target="_blank">Selenium</a><a class="btn" href="https://selenium-python-zh.readthedocs.io/en/latest/"  target="_blank">Selenium中文翻译</a><a class="btn" href="https://docs.scrapy.org/en/1.8/index.html"  target="_blank">Scrapy</a>
+
+<h3 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h3><a class="btn" href="https://www.mlhub123.com/"  target="_blank">机器学习导航</a><a class="btn" href="https://scikit-learn.org/stable/index.html"  target="_blank">Scikit-learn</a><a class="btn" href="http://tensorfly.cn/tfdoc/api_docs/README1.html"  target="_blank">TensorFlow</a><a class="btn" href="https://pytorch.org/docs/stable/index.html"  target="_blank">Pytorch</a>
+
+<h3 id="办公自动化"><a href="#办公自动化" class="headerlink" title="办公自动化"></a>办公自动化</h3><a class="btn" href="https://www.pythonexcel.com/openpyxl.php"  target="_blank">Openpyxl</a>
+
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><a class="btn" href="https://hexo.io/zh-cn/docs/"  target="_blank">Hexo</a><a class="btn" href="https://jupyter-notebook.readthedocs.io/en/stable/"  target="_blank">Jupyter_notebook</a>
+
+<h2 id="优质项目"><a href="#优质项目" class="headerlink" title="优质项目"></a>优质项目</h2><a class="btn" href="https://github.com/mherrmann/helium"  target="_blank">helium网页可视自动化工具</a><a class="btn" href="https://github.com/Smilexuhc/Data-Competition-TopSolution"  target="_blank">数据竞赛解决方案整理</a>
+
+
+
+
+</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
